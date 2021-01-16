@@ -1,0 +1,12 @@
+.item {
+  color: rgb(83, 245, 83);
+}
+
+.item img {
+  width: 20px;
+}
+
+.item div span {
+  color:red;
+}
+
