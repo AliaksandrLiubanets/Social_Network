@@ -24,24 +24,7 @@ const Dialogs = (props) => {
                 <DialogItem name='Sveta' id='3' />
                 <DialogItem name='Sasha' id='4' />
                 <DialogItem name='Victor' id='5' />
-                <DialogItem name='Valera' id='6' />
-
-                {/* <div className={s.dialog}>
-                    <NavLink to='/dialogs/2'>Andrey</NavLink>
-                </div>
-                <div className={s.dialog}>
-                    <NavLink to='/dialogs/3'>Sveta</NavLink>
-                </div> */}
-
-                {/* <div className={s.dialog}>
-                    <NavLink to='/dialogs/4'>Sasha</NavLink>
-                </div>
-                <div className={s.dialog}>
-                    <NavLink to='/dialogs/5'>Victor</NavLink>
-                </div>
-                <div className={s.dialog}>
-                    <NavLink to='/dialogs/6'>Valera</NavLink>
-                </div> */}
+                <DialogItem name='Valera' id='6' />                
             </div>
             <div className={s.messages}>
                 <Message message='Hi' />
