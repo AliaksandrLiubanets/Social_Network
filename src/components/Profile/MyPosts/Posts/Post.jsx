@@ -5,14 +5,14 @@ const Post = (props) => {
   return (
     <div className={s.posts}>
       <div className={s.item}>
-        <img src= { props.avatar }></img>
-        {props.message}
-        <div>
-          <span>like</span> { props.likesCounts }
+        <img src={props.avatar}></img>
+        <span className={s.post}>{props.message}</span>
+        <div className={s.likes}>
+          <span>like</span> {props.likesCounts}
         </div>
       </div>
-    </div>  
-    )  
+    </div>
+  )
 }
 
 export default Post;
