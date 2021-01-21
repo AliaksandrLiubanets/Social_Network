@@ -1,5 +1,4 @@
 import s from './MyPosts.module.css';
-import './Posts/Post';
 import Post from './Posts/Post';
 
 const MyPosts = (props) => {
@@ -10,7 +9,7 @@ const MyPosts = (props) => {
   ]
 
   let post = postsData
-  .map( post => <Post message={ post.message } likesCount={post.likesCount} id={ post.id } avatar={ post.avatar } />);
+  .map( post => <Post message={ post.message } likesCount={ post.likesCount } id={ post.id } avatar={ post.avatar } />);
 
   return (
     <div className={s.postsBlock}>
@@ -24,7 +23,7 @@ const MyPosts = (props) => {
         </div>
       </div>
       <div className={s.posts}>
-        { post }
+        { post }        
       </div>
     </div>
   )
