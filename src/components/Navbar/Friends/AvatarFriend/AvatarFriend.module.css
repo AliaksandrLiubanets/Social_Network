@@ -1,0 +1,10 @@
+.avatarFriend {
+    background-color: aqua;
+    text-align: center;  
+}
+
+.avatarFriend img {
+    width: 40px;
+    height: 55px; 
+    border-radius: 50%;     
+}

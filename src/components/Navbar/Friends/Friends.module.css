@@ -1,0 +1,21 @@
+.coupleAvaName {
+    display: grid;
+    grid-template-columns: 50px 50px 50px;
+    grid-template-rows: 50px 50px 50px;
+    grid-gap: 10px;
+    background-color: chartreuse;
+}
+
+.boxFriend {
+    display: grid;
+    grid-template-rows: 50px 1fr;
+    grid-template-columns: max-content;
+    padding: 0px; 
+    margin-top: 40px;   
+}
+
+.wordFriends {
+    /* background-color: chartreuse; */
+    text-align: center;
+    font-size: 24px;
+}
