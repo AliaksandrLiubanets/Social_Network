@@ -36,4 +36,16 @@ let state = {
     }
 }
 
+export let addPost = (postMessage) => {
+    
+    let newPost = {
+        id: 5,
+        message: postMessage,
+        likesCount: 0,
+        avatar: 'https://www.meme-arsenal.com/memes/72e09695c1914bab6839f87a78110201.jpg', 
+    }
+
+    state.profilePage.postsData.push(newPost);
+}
+
 export default state;

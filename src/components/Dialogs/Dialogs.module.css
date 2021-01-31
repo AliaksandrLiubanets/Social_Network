@@ -4,7 +4,11 @@
 }
 
 .dialogsItems {
-    padding: 10px;
+    padding: 10px;       
+}
+
+.dialogsItems div {    
+    margin-bottom: 5px;    
 }
 
 .dialogsItems .active {
@@ -23,10 +27,6 @@
 .avatar {
     width: 25px;
     height: 35px;
-}
-
-.dialogs div {
-    margin-bottom: 5px;
 }
 
 .dialogs span {
