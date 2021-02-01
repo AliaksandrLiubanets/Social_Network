@@ -13,6 +13,7 @@ const MyPosts = (props) => {
     
     let text = newPostElement.current.value;
     props.addPost(text); // отправляем в state (BLL) новый пост.
+    newPostElement.current.value = '';
   }
 
   return (
