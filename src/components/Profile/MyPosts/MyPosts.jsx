@@ -5,23 +5,27 @@ import Post from './Posts/Post';
 const MyPosts = (props) => {
   
   let postsElements =
-    props.state.postsData.map(post => <Post message={post.message} likesCount={post.likesCount} id={post.id} avatar={post.avatar} />);
+    props.posts.map(p => <Post message={p.message} likesCount={p.likesCount} id={p.id} avatar={p.avatar} />);
   
   let newPostElement = React.createRef();
 
-  let addPost = () => { //addPost название локальной функции.
-    
-    let text = newPostElement.current.value;
-    props.addPost(text); // отправляем в state (BLL) новый пост.
-    newPostElement.current.value = '';
+  let addPost = () => { //addPost название локальной функции.    
+    props.addPost(); // отправляем в state (BLL) новый пост.       
   }
 
+  let onPostChange = () => {
+    let text = newPostElement.current.value;
+    console.log(text);     
+    props.updateNewPostText(text);    
+  }
+ 
   return (
+    
     <div className={s.postsBlock}>
       <h3>My posts</h3>
       <div>
         <div>
-          <textarea ref={newPostElement}></textarea>
+          <textarea  onChange={onPostChange} ref={newPostElement} value={props.newPostText} />
         </div>
         <div>
           <button onClick={addPost}>Add post</button>

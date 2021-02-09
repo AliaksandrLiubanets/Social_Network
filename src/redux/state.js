@@ -8,6 +8,7 @@ let state = {
             { id: 3, message: 'Blabla', likesCount: 11, avatar: 'https://vjoy.cc/wp-content/uploads/2019/07/42-7.jpg' },
             { id: 4, message: 'Da', likesCount: 11, avatar: 'https://www.meme-arsenal.com/memes/72e09695c1914bab6839f87a78110201.jpg' },
         ],
+        newPostText: 'hard ',
     },
     dialogsPage: {
         dialogsData: [
@@ -21,11 +22,13 @@ let state = {
         messagesData: [
             { id: 1, message: 'Dimych say: Hi' },
             { id: 2, message: 'Andrey say: How is it going?' },
-            { id: 3, message: 'Sasha say: Hello everyone' },
-            { id: 4, message: 'Sveta say: Yo' },
+            { id: 3, message: 'Sveta say: Hello everyone' },
+            { id: 4, message: 'Sasha say: Yo' },
             { id: 5, message: 'Victor say: Yo' },
             { id: 6, message: 'Valera Say: Yo' },
         ],
+        newMessageText: 'message ',
+        someAvatarAndName: {id: 7, name: 'Somebody', avatar: 'https://live.warthunder.com/style/img/no_avatar.jpg'}
     },
     sidebar: {
         friends: [ 
@@ -37,18 +40,45 @@ let state = {
     }
 }
 
-export let addPost = (postMessage) => {
+export let updateNewPostText = (newText) => {
+    state.profilePage.newPostText = newText;
+    rerenderEntireTree(state);
+}
+
+export let addPost = () => {
     
     let newPost = {
         id: 5,
-        message: postMessage,
+        message: state.profilePage.newPostText,
         likesCount: 0,
         avatar: 'https://www.meme-arsenal.com/memes/72e09695c1914bab6839f87a78110201.jpg', 
     }
 
     state.profilePage.postsData.push(newPost);
+    state.profilePage.newPostText = '';    
+    rerenderEntireTree(state);    
+}
+
+export let updateNewMessageText = (newText) => {
+    state.dialogsPage.newMessageText = newText;
     rerenderEntireTree(state);
-    
+}
+
+export let addSomeAvatarAndName = () => {
+    let someAvatarAndName = state.dialogsPage.someAvatarAndName;
+    state.dialogsPage.dialogsData.push(someAvatarAndName);
+    rerenderEntireTree(state);
+}
+
+export let addMessage = () => {
+    let newMessage = {
+        id: 6,
+        message: state.dialogsPage.newMessageText
+    }
+
+    state.dialogsPage.messagesData.push(newMessage);
+    state.dialogsPage.newMessageText = '';    
+    rerenderEntireTree(state);
 }
 
 export default state;
