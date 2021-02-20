@@ -9,13 +9,13 @@ const MyPosts = (props) => {
   
   let newPostElement = React.createRef();
 
-  let addPost = () => { //addPost название локальной функции.    
+  let addPost = () => { //addPost название локальной функции.  
     props.addPost(); // отправляем в state (BLL) новый пост.       
   }
 
   let onPostChange = () => {
     let text = newPostElement.current.value;
-    console.log(text);     
+    console.log(text);
     props.updateNewPostText(text);    
   }
  
