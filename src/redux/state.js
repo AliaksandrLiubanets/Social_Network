@@ -1,3 +1,9 @@
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+const ADD_MESSAGE = 'ADD-MESSAGE';
+const ADD_SOME_AVATAR_AND_NAME = 'ADD-SOME-AVATAR-AND-NAME';
+
 let store = {    
     _state: {
         profilePage: {
@@ -50,10 +56,10 @@ let store = {
     },
 
     dispatch(action) {        
-        if (action.type === 'UPDATE-NEW-POST-TEXT') {
+        if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.newText;
             this._callSubscriber(this._state);
-        } else if (action.type === 'ADD-POST') {
+        } else if (action.type === ADD_POST) {
             let newPost = {
                 id: 5,
                 message: this._state.profilePage.newPostText,
@@ -64,10 +70,10 @@ let store = {
             this._state.profilePage.postsData.push(newPost);
             this._state.profilePage.newPostText = '';
             this._callSubscriber(this._state);
-        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
             this._state.dialogsPage.newMessageText = action.newText;
             this._callSubscriber(this._state);
-        } else if (action.type === 'ADD-MESSAGE') {
+        } else if (action.type === ADD_MESSAGE) {
             let newMessage = {
                 id: 6,
                 message: this._state.dialogsPage.newMessageText
@@ -76,14 +82,26 @@ let store = {
             this._state.dialogsPage.messagesData.push(newMessage);
             this._state.dialogsPage.newMessageText = '';
             this._callSubscriber(this._state);
-        } else if (action.type === 'ADD-SOME-AVATAR-AND-NAME') {
+        } else if (action.type === ADD_SOME_AVATAR_AND_NAME) {
             let someAvatarAndName = this._state.dialogsPage.someAvatarAndName;
             this._state.dialogsPage.dialogsData.push(someAvatarAndName);
             this._callSubscriber(this._state);
         }
     },
-
 }
+
+export const addPostActionCreator = () => ({type: ADD_POST});
+
+export const updateNewPostTextActionCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text});
+
+export const updateNewMessageTextActionCreator = (text) => ({type: UPDATE_NEW_MESSAGE_TEXT, newText: text});
+
+export const addMessageActionCreator = () => ({type: ADD_MESSAGE});
+
+export const addSomeAvatarAndNameActionCreator = () => ({type: ADD_SOME_AVATAR_AND_NAME});
+  
+
+
 
 export default store;
 window.store = store;

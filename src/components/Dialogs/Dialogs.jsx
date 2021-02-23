@@ -3,6 +3,10 @@ import s from './Dialogs.module.css';
 import { NavLink } from 'react-router-dom';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
+import {updateNewMessageTextActionCreator} from './../../redux/state';
+import {addMessageActionCreator} from './../../redux/state';
+import {addSomeAvatarAndNameActionCreator} from './../../redux/state';
+ 
 
 const Dialogs = (props) => {
     let dialogsElements =
@@ -13,22 +17,21 @@ const Dialogs = (props) => {
     let newMessageElement = React.createRef();
 
     let addMessage = () => {
-        props.dispatch({type: 'ADD-MESSAGE'});        
+        props.dispatch(addMessageActionCreator());        
     }
 
     let addSomeAvatarAndName = () => {
-        props.dispatch({type: 'ADD-SOME-AVATAR-AND-NAME'});
+        props.dispatch(addSomeAvatarAndNameActionCreator());
     }
 
     let addSomeAvatarAndNameWithMessage = () => {
-        debugger;
-        props.dispatch({type: 'ADD-SOME-AVATAR-AND-NAME'});
-        props.dispatch({type: 'ADD-MESSAGE'});  
+        props.dispatch(addSomeAvatarAndNameActionCreator());
+        props.dispatch(addMessageActionCreator());  
     }
 
     let onMessageChange = () => {
         let text = newMessageElement.current.value;
-        props.dispatch({type: 'UPDATE-NEW-MESSAGE-TEXT', newText: text});
+        props.dispatch(updateNewMessageTextActionCreator(text));
     }
     
     return (        
