@@ -11,7 +11,7 @@ let store = {
         },
         dialogsPage: {
             dialogsData: [
-                { id: 1, name: 'Dimych', avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUa__Y_-g-Hqiasz_OgSIhk_N5VHcbRBc3Ng&usqp=CAU'},
+                { id: 1, name: 'Dimych', avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUa__Y_-g-Hqiasz_OgSIhk_N5VHcbRBc3Ng&usqp=CAU' },
                 { id: 2, name: 'Andrew', avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBaIeEcKGjyP_NWQWd-8pRuJiR_ku780dyUQ&usqp=CAU' },
                 { id: 3, name: 'Sveta', avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9OCIzl9399tApSHYiacA8OfhhOT-_zQKcxQ&usqp=CAU' },
                 { id: 4, name: 'Sasha', avatar: 'https://i.pinimg.com/564x/98/b2/88/98b28840d82a8ec637642f4285a3f38a.jpg' },
@@ -27,61 +27,62 @@ let store = {
                 { id: 6, message: 'Valera Say: Yo' },
             ],
             newMessageText: 'message ',
-            someAvatarAndName: {id: 7, name: 'Somebody', avatar: 'https://live.warthunder.com/style/img/no_avatar.jpg'}
+            someAvatarAndName: { id: 7, name: 'Somebody', avatar: 'https://live.warthunder.com/style/img/no_avatar.jpg' }
         },
         sidebar: {
-            friends: [ 
-                {name: 'Andrew', avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBaIeEcKGjyP_NWQWd-8pRuJiR_ku780dyUQ&usqp=CAU' }, 
-                {name: 'Sasha', avatar: 'https://i.pinimg.com/564x/98/b2/88/98b28840d82a8ec637642f4285a3f38a.jpg' },
-                {name: 'Sveta', avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9OCIzl9399tApSHYiacA8OfhhOT-_zQKcxQ&usqp=CAU' },
+            friends: [
+                { name: 'Andrew', avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBaIeEcKGjyP_NWQWd-8pRuJiR_ku780dyUQ&usqp=CAU' },
+                { name: 'Sasha', avatar: 'https://i.pinimg.com/564x/98/b2/88/98b28840d82a8ec637642f4285a3f38a.jpg' },
+                { name: 'Sveta', avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9OCIzl9399tApSHYiacA8OfhhOT-_zQKcxQ&usqp=CAU' },
                 // {name: 'Valera', avatar: 'https://i.pinimg.com/originals/f4/05/4c/f4054c3db50a08c2f266e82b44b5ca90.jpg'},
             ],
         }
     },
-    getState() {
-        return this._state;
-    },
     _callSubscriber() {
         console.log('Temporary function');
     },
-    updateNewPostText(newText) {        
-        this._state.profilePage.newPostText = newText;
-        this._callSubscriber(this._state);
-    },
-    addPost() {          
-        let newPost = {
-            id: 5,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0,
-            avatar: 'https://www.meme-arsenal.com/memes/72e09695c1914bab6839f87a78110201.jpg', 
-        }
-    
-        this._state.profilePage.postsData.push(newPost);
-        this._state.profilePage.newPostText = '';    
-        this._callSubscriber(this._state);    
-    },
-    updateNewMessageText(newText) {
-        this._state.dialogsPage.newMessageText = newText;
-        this._callSubscriber(this._state);
-    },
-    addSomeAvatarAndName() {
-        let someAvatarAndName = this._state.dialogsPage.someAvatarAndName;
-        this._state.dialogsPage.dialogsData.push(someAvatarAndName);
-        this._callSubscriber(this._state);
-    },
-    addMessage() {
-        let newMessage = {
-            id: 6,
-            message: this._state.dialogsPage.newMessageText
-        }
-    
-        this._state.dialogsPage.messagesData.push(newMessage);
-        this._state.dialogsPage.newMessageText = '';    
-        this._callSubscriber(this._state);
+
+    getState() {
+        return this._state;
     },
     subscribe(observer) {
         this._callSubscriber = observer;
-    }
+    },
+
+    dispatch(action) {        
+        if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newText;
+            this._callSubscriber(this._state);
+        } else if (action.type === 'ADD-POST') {
+            let newPost = {
+                id: 5,
+                message: this._state.profilePage.newPostText,
+                likesCount: 0,
+                avatar: 'https://www.meme-arsenal.com/memes/72e09695c1914bab6839f87a78110201.jpg',
+            }
+
+            this._state.profilePage.postsData.push(newPost);
+            this._state.profilePage.newPostText = '';
+            this._callSubscriber(this._state);
+        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+            this._state.dialogsPage.newMessageText = action.newText;
+            this._callSubscriber(this._state);
+        } else if (action.type === 'ADD-MESSAGE') {
+            let newMessage = {
+                id: 6,
+                message: this._state.dialogsPage.newMessageText
+            }
+
+            this._state.dialogsPage.messagesData.push(newMessage);
+            this._state.dialogsPage.newMessageText = '';
+            this._callSubscriber(this._state);
+        } else if (action.type === 'ADD-SOME-AVATAR-AND-NAME') {
+            let someAvatarAndName = this._state.dialogsPage.someAvatarAndName;
+            this._state.dialogsPage.dialogsData.push(someAvatarAndName);
+            this._callSubscriber(this._state);
+        }
+    },
+
 }
 
 export default store;

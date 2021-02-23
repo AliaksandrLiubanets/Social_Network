@@ -4,22 +4,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import store from './redux/state';
 import App from './App';
-// import { subscribe } from './redux/state';
-// import { addPost } from './redux/state';
-// import { updateNewPostText } from './redux/state';
-// import { addMessage } from './redux/state';
-// import { updateNewMessageText } from './redux/state';
-// import { addSomeAvatarAndName } from './redux/state';
 
 let rerenderEntireTree = (state) => {
   ReactDOM.render(
     <React.StrictMode>
       <App state={state}
-        addPost={store.addPost.bind(store)}
-        updateNewPostText={store.updateNewPostText.bind(store)}
-        addMessage={store.addMessage.bind(store)}
-        updateNewMessageText={store.updateNewMessageText.bind(store)}
-        addSomeAvatarAndName={store.addSomeAvatarAndName.bind(store)} />
+        dispatch={store.dispatch.bind(store)} />
     </React.StrictMode>,
     document.getElementById('root')
   );
