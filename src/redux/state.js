@@ -1,10 +1,8 @@
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
-const ADD_MESSAGE = 'ADD-MESSAGE';
-const ADD_SOME_AVATAR_AND_NAME = 'ADD-SOME-AVATAR-AND-NAME';
+// import  reducerProfile  from './reducer-profile';
+import reducerDialogs from './reducer-dialogs';
+import reducerProfile from './reducer-profile';
 
-let store = {    
+let store = {
     _state: {
         profilePage: {
             postsData: [
@@ -13,7 +11,7 @@ let store = {
                 { id: 3, message: 'Blabla', likesCount: 11, avatar: 'https://vjoy.cc/wp-content/uploads/2019/07/42-7.jpg' },
                 { id: 4, message: 'Da', likesCount: 11, avatar: 'https://www.meme-arsenal.com/memes/72e09695c1914bab6839f87a78110201.jpg' },
             ],
-            newPostText: 'hard ',
+            newPostText: 'newPostText',
         },
         dialogsPage: {
             dialogsData: [
@@ -32,7 +30,7 @@ let store = {
                 { id: 5, message: 'Victor say: Yo' },
                 { id: 6, message: 'Valera Say: Yo' },
             ],
-            newMessageText: 'message ',
+            newMessageBody: '',
             someAvatarAndName: { id: 7, name: 'Somebody', avatar: 'https://live.warthunder.com/style/img/no_avatar.jpg' }
         },
         sidebar: {
@@ -55,53 +53,15 @@ let store = {
         this._callSubscriber = observer;
     },
 
-    dispatch(action) {        
-        if (action.type === UPDATE_NEW_POST_TEXT) {
-            this._state.profilePage.newPostText = action.newText;
-            this._callSubscriber(this._state);
-        } else if (action.type === ADD_POST) {
-            let newPost = {
-                id: 5,
-                message: this._state.profilePage.newPostText,
-                likesCount: 0,
-                avatar: 'https://www.meme-arsenal.com/memes/72e09695c1914bab6839f87a78110201.jpg',
-            }
+    dispatch(action) {
 
-            this._state.profilePage.postsData.push(newPost);
-            this._state.profilePage.newPostText = '';
-            this._callSubscriber(this._state);
-        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-            this._state.dialogsPage.newMessageText = action.newText;
-            this._callSubscriber(this._state);
-        } else if (action.type === ADD_MESSAGE) {
-            let newMessage = {
-                id: 6,
-                message: this._state.dialogsPage.newMessageText
-            }
+        reducerProfile(this.getState().profilePage, action);
 
-            this._state.dialogsPage.messagesData.push(newMessage);
-            this._state.dialogsPage.newMessageText = '';
-            this._callSubscriber(this._state);
-        } else if (action.type === ADD_SOME_AVATAR_AND_NAME) {
-            let someAvatarAndName = this._state.dialogsPage.someAvatarAndName;
-            this._state.dialogsPage.dialogsData.push(someAvatarAndName);
-            this._callSubscriber(this._state);
-        }
+        reducerDialogs(this.getState().dialogsPage, action);
+       
+        this._callSubscriber(this._state);
     },
 }
-
-export const addPostActionCreator = () => ({type: ADD_POST});
-
-export const updateNewPostTextActionCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text});
-
-export const updateNewMessageTextActionCreator = (text) => ({type: UPDATE_NEW_MESSAGE_TEXT, newText: text});
-
-export const addMessageActionCreator = () => ({type: ADD_MESSAGE});
-
-export const addSomeAvatarAndNameActionCreator = () => ({type: ADD_SOME_AVATAR_AND_NAME});
-  
-
-
 
 export default store;
 window.store = store;
