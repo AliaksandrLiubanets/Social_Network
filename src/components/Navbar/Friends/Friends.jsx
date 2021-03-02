@@ -3,7 +3,7 @@ import AvatarFriend from './AvatarFriend/AvatarFriend';
 import NameFriend from './NameFriend/NameFriend';
 
 const Friends = (props) => {
-  
+    debugger;  
     let avatarFriend =
         props.state.sidebar.friends.map(ava => <AvatarFriend avatar={ava.avatar} />);
     let nameFriend =

@@ -13,12 +13,12 @@ const Dialogs = (props) => {
     
     let newMessageBody = props.store.getState().dialogsPage.newMessageBody;
 
-    let onAddSomeAvatarAndNameWithMessageClick = () => {
+    let onAddSomeAvatarAndNameWithMessageClick = () => {  // - click button
         props.store.dispatch(addSomeAvatarAndNameActionCreator());
         props.store.dispatch(sendMessageActionCreator());  
     }
 
-    let onSendMessageClick = (event) => {
+    let onSendMessageClick = (event) => { // - change textarea
         let body = event.target.value;
         props.store.dispatch(updateNewMessageBodyActionCreator(body));
     }

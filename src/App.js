@@ -11,6 +11,7 @@ import Settings from './components/Settings/Settings';
 
 
 const App = (props) => {
+  debugger;
   return (
     <BrowserRouter>
       <div className='app-wrapper'>

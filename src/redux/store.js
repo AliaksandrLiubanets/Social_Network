@@ -1,6 +1,7 @@
 // import  reducerProfile  from './reducer-profile';
 import reducerDialogs from './reducer-dialogs';
 import reducerProfile from './reducer-profile';
+import reducerSidebar from './reducer-sidebar';
 
 let store = {
     _state: {
@@ -49,6 +50,7 @@ let store = {
     getState() {
         return this._state;
     },
+    
     subscribe(observer) {
         this._callSubscriber = observer;
     },
@@ -58,6 +60,8 @@ let store = {
         reducerProfile(this.getState().profilePage, action);
 
         reducerDialogs(this.getState().dialogsPage, action);
+
+        reducerSidebar(this.getState().sidebar, action);
        
         this._callSubscriber(this._state);
     },
