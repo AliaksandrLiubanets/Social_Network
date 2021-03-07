@@ -50,7 +50,7 @@ let store = {
     getState() {
         return this._state;
     },
-    
+
     subscribe(observer) {
         this._callSubscriber = observer;
     },

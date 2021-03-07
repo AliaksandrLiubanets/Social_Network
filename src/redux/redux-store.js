@@ -11,5 +11,9 @@ let reducers = combineReducers({
 })
 
 let store = createStore(reducers);
+// getState();
+// subscribe(observer);
+// dispatch(action);
+
 
 export default store;

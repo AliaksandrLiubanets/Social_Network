@@ -18,3 +18,8 @@
 .likes {
   margin-bottom: 15px;
 }
+
+.likes span {
+  cursor: pointer;
+}
+

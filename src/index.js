@@ -6,15 +6,15 @@ import store from './redux/redux-store';
 import App from './App';
 
 let rerenderEntireTree = (state) => {
-  debugger;
+  
   ReactDOM.render(
     <React.StrictMode>
-      <App state={state} dispatch={store.dispatch.bind(store)} store={store} />
+      <App store={store} />
     </React.StrictMode>,
     document.getElementById('root')
   );
 }
-
+//dispatch={store.dispatch.bind(store)}
 rerenderEntireTree(store.getState());
 
 store.subscribe(() => {
