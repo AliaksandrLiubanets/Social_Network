@@ -3,11 +3,11 @@ import AvatarFriend from './AvatarFriend/AvatarFriend';
 import NameFriend from './NameFriend/NameFriend';
 
 const Friends = (props) => {
-      
+      debugger;
     let avatarFriend =
-        props.store.getState().sidebar.friends.map(ava => <AvatarFriend avatar={ava.avatar} />);
+        props.state.map(ava => <AvatarFriend avatar={ava.avatar} />);
     let nameFriend =
-        props.store.getState().sidebar.friends.map(name => <NameFriend name={name.name} />);
+        props.state.map(name => <NameFriend name={name.name} />);
 
     // let friendsArray = props.state.sidebar.friends;
     // let arrayOfAvatarsAndNames = [];
