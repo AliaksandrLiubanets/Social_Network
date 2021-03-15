@@ -4,7 +4,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import store from './redux/redux-store';
 import App from './App';
-import storeContext, { Provider } from './storeContext';
+import { Provider } from 'react-redux';
+// import storeContext, { Provider } from './storeContext';
+
 
 let rerenderEntireTree = (state) => {
   
