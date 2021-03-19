@@ -13,12 +13,15 @@ let initialState = {
 }
 
 const reducerProfile = (state = initialState, action) => {
-    // debugger;    
+    debugger;    
     switch (action.type) {
-        case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.newText;
-            return state;
-        case ADD_POST:
+        case UPDATE_NEW_POST_TEXT:{
+            let stateCopy = {...state};
+            stateCopy.newPostText = action.newText;
+            return stateCopy;
+        }           
+        case ADD_POST: {
+            
             let newPost = {
                 id: 5,
                 message: state.newPostText,
@@ -26,9 +29,12 @@ const reducerProfile = (state = initialState, action) => {
                 avatar: 'https://www.meme-arsenal.com/memes/72e09695c1914bab6839f87a78110201.jpg',
             }
 
-            state.postsData.push(newPost);
-            state.newPostText = '';
-            return state;        
+            let stateCopy = {...state};
+            stateCopy.postsData = [...state.postsData];
+            stateCopy.postsData.push(newPost);
+            stateCopy.newPostText = '';
+            return stateCopy; 
+        }       
         default:
             return state;
     }
