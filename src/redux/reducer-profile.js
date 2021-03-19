@@ -13,12 +13,15 @@ let initialState = {
 }
 
 const reducerProfile = (state = initialState, action) => {
-    debugger;    
+    // let stateCopy = {...state};
     switch (action.type) {
-        case UPDATE_NEW_POST_TEXT:{
-            let stateCopy = {...state};
-            stateCopy.newPostText = action.newText;
-            return stateCopy;
+        case UPDATE_NEW_POST_TEXT:{ 
+            return {                            //Возвращаем новый созданный объект
+                ...state,                       //Делаем поверхностное копирование state
+                newPostText: action.newText     //В качестве нового свойства объекта создаем newPostText и присваиваем значение action.newText
+            }          
+            // stateCopy.newPostText = action.newText;}
+            // return stateCopy;
         }           
         case ADD_POST: {
             
@@ -28,12 +31,16 @@ const reducerProfile = (state = initialState, action) => {
                 likesCount: 0,
                 avatar: 'https://www.meme-arsenal.com/memes/72e09695c1914bab6839f87a78110201.jpg',
             }
-
-            let stateCopy = {...state};
-            stateCopy.postsData = [...state.postsData];
-            stateCopy.postsData.push(newPost);
-            stateCopy.newPostText = '';
-            return stateCopy; 
+            
+            // stateCopy.postsData = [...state.postsData];
+            // stateCopy.postsData.push(newPost);
+            // stateCopy.newPostText = '';
+            // return stateCopy; 
+            return {                                        //Возвращаем новый созданный объект
+                ...state,                                   //Делаем поверхностное копирование state
+                newPostText: '',                            //В качестве нового свойства объекта создаем newPostText и присваиваем значение ''
+                postsData: [...state.postsData, newPost]    //Также создаём ещё одно свойство нового объекта со значением массива. Делаем копию массива state.postsData                                                             
+            }                                               //и добавляем в этот массив новое значение newPost
         }       
         default:
             return state;
