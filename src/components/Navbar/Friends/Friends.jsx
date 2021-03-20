@@ -5,9 +5,9 @@ import NameFriend from './NameFriend/NameFriend';
 const Friends = (props) => {
 
     let avatarFriend =
-        props.state.map(ava => <AvatarFriend avatar={ava.avatar} />);
+        props.state.map(ava => <AvatarFriend key={ava.id} avatar={ava.avatar} />);
     let nameFriend =
-        props.state.map(name => <NameFriend name={name.name} />);
+        props.state.map(name => <NameFriend key={name.id} name={name.name} />);
 
     return (
         <div className={s.boxFriend}>

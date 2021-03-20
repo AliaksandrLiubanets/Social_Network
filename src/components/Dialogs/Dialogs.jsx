@@ -6,9 +6,9 @@ import Message from './Message/Message';
 const Dialogs = (props) => {
     
     let dialogsElements =
-        props.state.dialogsData.map(d => <DialogItem avatar={d.avatar} name={d.name} id={d.id} />)
+        props.state.dialogsData.map(d => <DialogItem key={d.id} avatar={d.avatar} name={d.name} id={d.id} />)
     let messagesElements =
-        props.state.messagesData.map(m => <Message message={m.message} id={m.id} />)
+        props.state.messagesData.map(m => <Message key={m.id} message={m.message} id={m.id} />)
     
     let onAddSomeAvatarAndNameWithMessageClick = () => {  // - click button
         props.addAvatarAndMessage();  

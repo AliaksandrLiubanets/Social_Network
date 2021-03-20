@@ -15,15 +15,15 @@ let initialState = {
 const reducerProfile = (state = initialState, action) => {
     // let stateCopy = {...state};
     switch (action.type) {
-        case UPDATE_NEW_POST_TEXT:{ 
+        case UPDATE_NEW_POST_TEXT: 
             return {                            //Возвращаем новый созданный объект
                 ...state,                       //Делаем поверхностное копирование state
                 newPostText: action.newText     //В качестве нового свойства объекта создаем newPostText и присваиваем значение action.newText
             }          
             // stateCopy.newPostText = action.newText;}
             // return stateCopy;
-        }           
-        case ADD_POST: {
+                   
+        case ADD_POST: 
             
             let newPost = {
                 id: 5,
@@ -36,12 +36,12 @@ const reducerProfile = (state = initialState, action) => {
             // stateCopy.postsData.push(newPost);
             // stateCopy.newPostText = '';
             // return stateCopy; 
-            return {                                        //Возвращаем новый созданный объект
+            return {                                       //Возвращаем новый созданный объект
                 ...state,                                   //Делаем поверхностное копирование state
                 newPostText: '',                            //В качестве нового свойства объекта создаем newPostText и присваиваем значение ''
                 postsData: [...state.postsData, newPost]    //Также создаём ещё одно свойство нового объекта со значением массива. Делаем копию массива state.postsData                                                             
             }                                               //и добавляем в этот массив новое значение newPost
-        }       
+              
         default:
             return state;
     }
