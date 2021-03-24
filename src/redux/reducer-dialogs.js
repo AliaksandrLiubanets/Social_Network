@@ -25,15 +25,15 @@ let initialState = {
 
 const reducerDialogs = (state = initialState, action) => {
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_BODY:{
+        case UPDATE_NEW_MESSAGE_BODY:
             // let stateCopy = {...state};
             // stateCopy.newMessageBody = action.newBody;
             return {
                 ...state,
                 newMessageBody: action.newBody
             }
-        } 
-        case SEND_MESSAGE: {
+         
+        case SEND_MESSAGE: 
             // let stateCopy = {...state};         
             let newMessage = {
             id: 7,
@@ -50,7 +50,7 @@ const reducerDialogs = (state = initialState, action) => {
                 messagesData: [...state.messagesData, newMessage],
                 newMessageBody: ''
             }
-        }
+        
         case ADD_SOME_AVATAR_AND_NAME:
             let someAvatarAndName = state.someAvatarAndName;
             state.dialogsData.push(someAvatarAndName);   
