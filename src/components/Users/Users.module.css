@@ -1,0 +1,92 @@
+.userData {
+    padding: 10px;
+    background-color: rgb(241, 199, 199);
+    display: grid;
+    grid-template-columns: 2fr 14fr;
+    grid-template-rows: 1fr;
+    grid-gap: 10px ;
+    grid-template-areas: 
+    'ava data';
+}
+
+.avaFollow {
+    background-color: cadetblue;
+    display: grid;
+    grid-template-columns:  1fr;
+    grid-template-rows: 4fr 1fr;  
+    grid-area: 'ava';
+    
+}
+
+.userPhoto {
+    width: 75px;
+    height: 100px; 
+    border-radius: 50%;   
+}
+
+.buttonBox {
+    background-color: chartreuse;  
+    margin: auto;  
+}
+
+.userPhotoBox {
+    background-color: chocolate; 
+    margin: auto;      
+}
+
+.personalDataBox {
+    border: solid 2px rgb(95, 94, 94);
+    border-radius: 5px;
+    background-color: burlywood;
+    grid-area: 'data';
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 125px ;
+    grid-gap: 10px ;
+    
+}
+
+.personalDataBox, .avaFollow {
+    padding: 5px;    
+}
+
+.nameStatus {
+    background-color: cornflowerblue;
+    position: relative;
+}
+
+.name {
+    background-color: rgb(164, 164, 247);   
+}
+
+.status {
+    font-size: 18px;
+    position: absolute;
+    bottom: 0;
+    background-color: aliceblue;    
+}
+
+.name, .country, .city {
+    font-size: 26px;
+}
+
+.country {
+    background-color: rgb(129, 221, 190);
+}
+
+.city {
+    background-color: aquamarine;
+}
+
+.countryCity {
+    background-color: cyan;
+    text-align: right;
+}
+
+
+
+
+
+
+
+
