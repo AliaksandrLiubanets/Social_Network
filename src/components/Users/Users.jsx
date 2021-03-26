@@ -1,7 +1,6 @@
 import React from 'react';
 import s from './Users.module.css'
 
-
 let Users = (props) => {
         if (props.users.length === 0) {
                 props.setUsers([
@@ -12,69 +11,35 @@ let Users = (props) => {
                 ])
         }
 
-        // return <div>
-        //         {
-        //                 props.users.map( u => <div key={u.id}>
-        //                         <span>
-        //                                 <div>
-        //                                         <img className={s.userPhoto}></img>
-        //                                 </div>
-        //                                 <div>
-        //                                         {
-        //                                                 u.followed
-        //                                                 ? <button onClick={ () => {props.unfollowUser(u.id)} }>Unfollow</button>
-        //                                                 : <button onClick={ () => {props.followUser(u.id)} }>Follow</button>
-        //                                         }
-        //                                 </div>
-        //                         </span>
-        //                         <span>
-        //                                 <span>
-        //                                         <div>{u.fullName}</div>
-        //                                         <div>{u.status}</div>
-        //                                 </span>
-        //                                 <span>
-        //                                         <div>{u.location.country}</div>
-        //                                         <div>{u.location.city}</div>
-        //                                 </span>
-        //                         </span>
-        //                         </div>)
-        //         }
-        // </div>
-
-
         return (<div>
                 {
-                        props.users.map(u =>
-                                < div key={u.id} className={s.userData} >
-
-                                        <div className={s.avaFollow}>
-                                                <div className={s.userPhotoBox}>
-                                                        <img className={s.userPhoto} src={u.avatar}></img>
-                                                </div>
-                                                <div className={s.buttonBox}>
-                                                        {
-                                                                u.followed === false
-                                                                        ? <button  onClick={() => { props.followUser(u.id) }}>Follow</button>
-                                                                        : <button  onClick={() => { props.unfollowUser(u.id) }}>Unfollow</button>
-                                                        }
-                                                </div>
-
+                        props.users.map(u => < div key={u.id} className={s.userData} >
+                                <div className={s.avaFollow}>
+                                        <div className={s.userPhotoBox}>
+                                                <img className={s.userPhoto} src={u.avatar}></img>
                                         </div>
-                                        <div className={s.personalDataBox}>
-                                                <div className={s.nameStatus}>
-                                                        <div className={s.name}>{u.fullName}</div>
-                                                        <div className={s.status}>{u.status}</div>
-                                                </div>
-                                                <div className={s.countryCity}>
-                                                        <div className={s.country}>{u.location.country}</div>
-                                                        <div className={s.city}>{u.location.city}</div>
-                                                </div>
+                                        <div className={s.buttonBox}>
+                                                {
+                                                        u.followed === false
+                                                                ? <button onClick={() => { props.followUser(u.id) }}>Follow</button>
+                                                                : <button onClick={() => { props.unfollowUser(u.id) }}>Unfollow</button>
+                                                }
                                         </div>
                                 </div>
+                                <div className={s.personalDataBox}>
+                                        <div className={s.nameStatus}>
+                                                <div className={s.name}>{u.fullName}</div>
+                                                <div className={s.status}>{u.status}</div>
+                                        </div>
+                                        <div className={s.countryCity}>
+                                                <div className={s.country}>{u.location.country}</div>
+                                                <div className={s.city}>{u.location.city}</div>
+                                        </div>
+                                </div>
+                        </div>
                         )
                 }
         </div >
-
         )
 
 }

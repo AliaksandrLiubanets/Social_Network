@@ -1,6 +1,6 @@
 .userData {
     padding: 10px;
-    background-color: rgb(241, 199, 199);
+    background-color: rgb(234, 255, 255);
     display: grid;
     grid-template-columns: 2fr 14fr;
     grid-template-rows: 1fr;
@@ -10,7 +10,7 @@
 }
 
 .avaFollow {
-    background-color: cadetblue;
+    /* background-color: cadetblue; */
     display: grid;
     grid-template-columns:  1fr;
     grid-template-rows: 4fr 1fr;  
@@ -25,19 +25,19 @@
 }
 
 .buttonBox {
-    background-color: chartreuse;  
+    /* background-color: chartreuse;   */
     margin: auto;  
 }
 
 .userPhotoBox {
-    background-color: chocolate; 
+    /* background-color: chocolate;  */
     margin: auto;      
 }
 
 .personalDataBox {
     border: solid 2px rgb(95, 94, 94);
     border-radius: 5px;
-    background-color: burlywood;
+    background-color: rgb(249, 255, 249);
     grid-area: 'data';
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -51,19 +51,19 @@
 }
 
 .nameStatus {
-    background-color: cornflowerblue;
+    /* background-color: cornflowerblue; */
     position: relative;
 }
 
 .name {
-    background-color: rgb(164, 164, 247);   
+    /* background-color: rgb(164, 164, 247);    */
 }
 
 .status {
     font-size: 18px;
     position: absolute;
     bottom: 0;
-    background-color: aliceblue;    
+    /* background-color: aliceblue;     */
 }
 
 .name, .country, .city {
@@ -71,22 +71,15 @@
 }
 
 .country {
-    background-color: rgb(129, 221, 190);
+    /* background-color: rgb(129, 221, 190); */
 }
 
 .city {
-    background-color: aquamarine;
+    /* background-color: aquamarine; */
 }
 
 .countryCity {
-    background-color: cyan;
+    /* background-color: cyan; */
     text-align: right;
 }
-
-
-
-
-
-
-
-
+                                       
