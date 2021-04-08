@@ -1,3 +1,7 @@
+.usersBox {
+    max-width: 950px;
+}
+
 .userData {
     padding: 10px;
     /* background-color: rgb(234, 255, 255); */
@@ -81,5 +85,19 @@
 .countryCity {
     /* background-color: cyan; */
     text-align: right;
+}
+
+.paginationBox {
+    
+}
+
+.paginationBox span {
+    padding: 1px;
+    cursor: pointer;
+}
+
+.selectedPage {
+    font-weight: bold;
+    
 }
                                        
