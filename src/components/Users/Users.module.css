@@ -88,11 +88,13 @@
 }
 
 .paginationBox {
-    
+    padding: 10px;
+    background-color: aqua;
+    /* margin: auto; */
 }
 
 .paginationBox span {
-    padding: 1px;
+    padding: 2px;
     cursor: pointer;
 }
 
