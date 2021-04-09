@@ -5,10 +5,10 @@ import { followAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, unfollowA
 import *as axios from 'axios';
 import Users from '../Users/Users'
 
-class UsersAPIComponent extends React.Component {        
+class UsersContainer extends React.Component {        
        
     componentDidMount() {  // Не переднеаём этот метод в props, т.к. чистой функции - компоненте Users, не нужно делать запрос на сервер при загрузке страницы.
-                           // Для этого мы и создавали классовую компоненту (UsersAPIComponent), чтобы она взяла на себя функцию запроса на сервер при загрузке страницы.
+                           // Для этого мы и создавали классовую компоненту UsersContainer( бывшая UsersAPIComponent), чтобы она взяла на себя функцию запроса на сервер при загрузке страницы.
 
             axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then(response => { 
@@ -69,6 +69,10 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent);
+// const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
 
-export default UsersContainer;
+// export default UsersContainer;
+
+// то же самое, но короче:
+
+export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
