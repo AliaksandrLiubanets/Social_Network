@@ -1,11 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { followAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, toggleIsFetchingAC, unfollowAC } from '../../redux/reducer-users';
+import { followUser, // изменили импорты, убрав AC  и в reducer-users тоже.
+    setCurrentPage, 
+    setTotalUsersCount, 
+    setUsers, 
+    toggleIsFetching, 
+    unfollowUser } from '../../redux/reducer-users';
 import *as axios from 'axios';
 import Users from '../Users/Users';
 import Preloader from '../../common/Preloader/Preloader';
-
-
 
 class UsersContainer extends React.Component {        
        
@@ -58,34 +61,42 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        followUser: (userId) => {
-            dispatch(followAC(userId))
-        },
-        unfollowUser: (userId) => {
-            dispatch(unfollowAC(userId))
-        },
-        setUsers: (users) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (users) => {
-            dispatch(setCurrentPageAC(users))
-        },
-        setTotalUsersCount: (usersCount) => {
-            dispatch(setTotalUsersCountAC(usersCount))
-        },
-        toggleIsFetching: (isFetching) => {
-            dispatch(toggleIsFetchingAC(isFetching))
-        }
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         followUser: (userId) => {
+//             dispatch(followAC(userId))
+//         },
+//         unfollowUser: (userId) => {
+//             dispatch(unfollowAC(userId))
+//         },
+//         setUsers: (users) => {
+//             dispatch(setUsersAC(users))
+//         },
+//         setCurrentPage: (users) => {
+//             dispatch(setCurrentPageAC(users))
+//         },
+//         setTotalUsersCount: (usersCount) => {
+//             dispatch(setTotalUsersCountAC(usersCount))
+//         },
+//         toggleIsFetching: (isFetching) => {
+//             dispatch(toggleIsFetchingAC(isFetching))
+//         }
 
-    }
-}
+//     }
+// }
 
-// const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+// export default connect(mapStateToProps,{
+//     followUser: followAC,
+//     unfollowUser: unfollowAC,
+//     setUsers: setUsersAC,
+//     setCurrentPage: setCurrentPageAC,
+//     setTotalUsersCount: setTotalUsersCountAC,
+//     toggleIsFetching: toggleIsFetchingAC
+// })(UsersContainer);
 
-// export default UsersContainer;
+// Вставляем { объект } mapStateToProps в hoc connect и получаем сокращение кода ч-з одинаковое название callback-функций и ActionCreator. 
+// В объекте, когда свойство и значение имеют одинаковое написание, то можно писать только свойства.
+// А ф-ция connect сама внутри себя создаёт метод mapDispatchToProps, который возвращает объект, при наличии объекта внутри себя.
 
-// то же самое, но короче:
+export default connect(mapStateToProps, { followUser, unfollowUser, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching } )(UsersContainer);
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
