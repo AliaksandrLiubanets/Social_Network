@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './Users.module.css';
 import userEmptyAvatar from '../../assets/userEmptyAvatar.png'
+import { NavLink } from 'react-router-dom';
 
 const Users = (props) => {
    
@@ -12,7 +13,7 @@ const Users = (props) => {
                 }
 
     return <div className={s.usersBox}>
-        <div className={s.paginationBox}>
+        <div className={s.paginationBox}>  
             {
                 page.map(p => {
                     return <span onClick={() => { props.onChangeClick(p) }} className={props.currentPage === p ? s.selectedPage : ''}>{p}</span>
@@ -23,7 +24,9 @@ const Users = (props) => {
             props.users.map(u => < div key={u.id} className={s.userData} >
                 <div className={s.avaFollow}>
                     <div className={s.userPhotoBox}>
+                        <NavLink to='./profile'>
                         <img className={s.userPhoto} src={u.photos.small !== null ? u.photos.small : userEmptyAvatar}></img>
+                        </NavLink>
                     </div>
                     <div className={s.buttonBox}>
                         {

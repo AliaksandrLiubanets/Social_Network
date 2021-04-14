@@ -12,7 +12,7 @@ import Preloader from '../../common/Preloader/Preloader';
 
 class UsersContainer extends React.Component {        
        
-    componentDidMount() {  // Не переднеаём этот метод в props, т.к. чистой функции - компоненте Users, не нужно делать запрос на сервер при загрузке страницы.
+    componentDidMount() {  // Не передаём этот метод в props, т.к. чистой функции - компоненте Users, не нужно делать запрос на сервер при загрузке страницы.
                            // Для этого мы и создавали классовую компоненту UsersContainer( бывшая UsersAPIComponent), чтобы она взяла на себя функцию запроса на сервер при загрузке страницы.
             
             this.props.toggleIsFetching(true) // При загрузке странице перекулючаем toggle на true в state, т.е. идёт загрузка
