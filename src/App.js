@@ -10,10 +10,10 @@ import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
+import ProfileContainer from './components/Profile/ProfileContainer';
 
 
-const App = () => {
-  
+const App = () => {  
   return (
     <BrowserRouter>
       <div className='app-wrapper'>
@@ -21,7 +21,7 @@ const App = () => {
         <Navbar />
         <div className='app-wrapper-content'>
           <Route path='/dialogs' render={() => <DialogsContainer />} />
-          <Route path='/profile' render={() => <Profile />} />
+          <Route path='/profile' render={() => <ProfileContainer />} />
           <Route path='/news' render={() => <News />} />
           <Route path='/music' render={() => <Music />} />
           <Route path='/users' render={() => <UsersContainer />} />
