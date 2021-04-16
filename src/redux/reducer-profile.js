@@ -11,8 +11,8 @@ let initialState = {
         // { id: 4, message: 'Da', likesCount: 11, avatar: 'https://www.meme-arsenal.com/memes/72e09695c1914bab6839f87a78110201.jpg' },
     ],
     newPostText: 'newPostText',
-    // profile: null
-    profile: { id: 1, Fullname: 'Shara', aboutMe: 'Hi, How are you?', likesCount: 15, photos: {large: 'https://img0.liveinternet.ru/images/attach/c/3/84/342/84342334_Girls29563.jpg' }}
+    profile: null
+    // profile: { id: 1, Fullname: 'Shara', aboutMe: 'Hi, How are you?', likesCount: 15, photos: {large: 'https://img0.liveinternet.ru/images/attach/c/3/84/342/84342334_Girls29563.jpg' }}
 }
 
 const reducerProfile = (state = initialState, action) => {
