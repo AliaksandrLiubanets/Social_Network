@@ -24,7 +24,7 @@ const Users = (props) => {
             props.users.map(u => < div key={u.id} className={s.userData} >
                 <div className={s.avaFollow}>
                     <div className={s.userPhotoBox}>
-                        <NavLink to='./profile'>
+                        <NavLink to={'./profile' + u.id} >
                         <img className={s.userPhoto} src={u.photos.small !== null ? u.photos.small : userEmptyAvatar}></img>
                         </NavLink>
                     </div>
