@@ -16,7 +16,7 @@ class UsersContainer extends React.Component {
                            // Для этого мы и создавали классовую компоненту UsersContainer( бывшая UsersAPIComponent), чтобы она взяла на себя функцию запроса на сервер при загрузке страницы.
             
             this.props.toggleIsFetching(true) // При загрузке странице перекулючаем toggle на true в state, т.е. идёт загрузка
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {withCredentials: true})
             .then(response => {
                     this.props.toggleIsFetching(false) // После получения response от сервера, переключаем toggle на false, т.е. уже загружено всё, меняем state. Прекратилась отрисовка Preloader.
                     this.props.setUsers(response.data.items)
@@ -27,7 +27,7 @@ class UsersContainer extends React.Component {
     onChangeClick = (pageNumber) => {
             this.props.toggleIsFetching(true)
             this.props.setCurrentPage(pageNumber);
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {withCredentials: true})
             .then(response => { 
                     this.props.toggleIsFetching(false)
                     this.props.setUsers(response.data.items)
