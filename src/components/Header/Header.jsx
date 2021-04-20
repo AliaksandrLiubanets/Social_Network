@@ -3,7 +3,7 @@ import s from './Header.module.css';
 import loginUserAvatar from '../../assets/loginUserAvatar.png'
 
 const Header = (props) => {
-
+debugger;
   return <header className={s.header}>
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6_lULuLhKRsxlcn_z3OW5mU4IV1v18fTkEg&usqp=CAU"></img>
 

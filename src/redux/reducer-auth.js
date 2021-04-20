@@ -1,6 +1,7 @@
 const SET_USER_DATA = 'SET_LOGIN_DATA';
 const SET_USER_AVATAR = 'SET_USER_AVATAR';
 
+
 let initialState = {
     userId: null,
     email: null,

@@ -16,7 +16,7 @@ class HeaderContainer extends React.Component {
         }
       })
 
-    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
+    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`) // Не факт, что работает запрос. Debugger не срабатывает.
       .then(response => {
         debugger;
         this.props.setUserAvatar(response.data.photos.small)
