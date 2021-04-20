@@ -1,12 +1,12 @@
 import axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
-import { setAuthUserData } from '../../redux/reducer-auth';
+import { setAuthUserData, setUserAvatar } from '../../redux/reducer-auth';
 import Header from './Header';
 
 class HeaderContainer extends React.Component {
   componentDidMount() {
-
+    let userId = this.props.userId;
     axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, { withCredentials: true }) // при кросс-доменном запросе необходимо делать уточнение, что всё равно надо сделать запрос, несмотря на кросс-домменый запрос. Используется {withCredentials: ture}. Предварительно мы уже зарегистрировались на сайте!!!
       .then(response => {
 
@@ -15,6 +15,15 @@ class HeaderContainer extends React.Component {
           this.props.setAuthUserData(id, email, login)
         }
       })
+
+    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
+      .then(response => {
+        debugger;
+        this.props.setUserAvatar(response.data.photos.small)
+      })
+
+
+
   }
 
   render = () => {
@@ -25,7 +34,9 @@ class HeaderContainer extends React.Component {
 const mapStateToProps = (state) => ({
   login: state.auth.login,
   isAuth: state.auth.isAuth,
-  userId: state.auth.userId
+  userId: state.auth.userId,
+  userAvatar: state.auth.userAvatar,
+
 })
 
 // const mapDispatchToProps = (dispatch) => {
@@ -36,5 +47,5 @@ const mapStateToProps = (state) => ({
 //   }
 // }
 
-export default connect(mapStateToProps, {setAuthUserData} )(HeaderContainer);
+export default connect(mapStateToProps, { setAuthUserData, setUserAvatar })(HeaderContainer);
 // export default HeaderContainer;
