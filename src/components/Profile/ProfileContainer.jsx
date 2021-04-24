@@ -6,14 +6,16 @@ import { setUserProfile } from '../../redux/reducer-profile'
 import Profile from './Profile'
 
 class ProfileContainer extends React.Component {
-    componentDidMount () {            
+    componentDidMount () {        
+          
         let userId = this.props.match.params.userId;
 
         if(!userId) { // В App path='/profile/:userId?' символ ? означает, что параметр userId сттал опционным - он мож быть или не быть. А значит в переменной userId, 
-            userId = 2; // что инициализирована выше, не передано значение. Через Если мы не кликнем на аву user и захотим загрузить страницу Profile, чтобы она загрузилась присваимаем userId = 2, иначе в  
+            userId = 2;  
         }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-        .then( response => {            
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`, {withCredentials: true})
+        .then( response => {         
+                 
             this.props.setUserProfile(response.data)
         })
     }

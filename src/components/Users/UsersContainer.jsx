@@ -16,10 +16,10 @@ class UsersContainer extends React.Component {
        
     componentDidMount() {  
 
-            this.props.toggleIsFetching(true) // При загрузке странице перекулючаем toggle на true в state, т.е. идёт загрузка
+            this.props.toggleIsFetching(true) 
             usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
             .then(data => {                
-                    this.props.toggleIsFetching(false) // После получения response от сервера, переключаем toggle на false, т.е. уже загружено всё, меняем state. Прекратилась отрисовка Preloader.
+                    this.props.toggleIsFetching(false) 
                     this.props.setUsers(data.items)
                     this.props.setTotalUsersCount(data.totalCount)
             })   
