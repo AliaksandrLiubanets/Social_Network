@@ -1,10 +1,34 @@
 .header {  
   grid-area: h;
   background-color: rgb(102, 145, 226);
-  
+  position: relative;  
 }
 
 .header img {
   width: 20px;
   height: 20px;
+}
+
+.login, .authorizedUser {
+  color: white;
+  font-size: bold;
+  float: right;
+  padding-top: 5px;
+  padding-right: 30px;  
+}
+ 
+.authorizedUser {
+  color: rgb(26, 59, 26);
+  font-weight: 500;
+ 
+}
+
+.authorizedUser img {
+  width: 30px;
+  height: 30px;
+  float: right;
+}
+
+.userAvatar {
+  float: right; 
 }
