@@ -22,6 +22,12 @@ export const usersAPI = {
     // axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, { withCredentials: true, headers: { 'API-KEY': '5932b879-3da4-4ae5-ae52-8eacea60088f' } })
     unfollowUser(userId) {
         return instance.delete(`follow/${userId}`)
+    }, 
+
+    // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`, {withCredentials: true})
+    getProfileUser(userId) {
+        return instance.get(`profile/${userId}`)
+        .then( response => response.data )
     }
 }
 
