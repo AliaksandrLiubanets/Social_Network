@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { usersAPI } from '../../api/api';
 
 const Users = (props) => {
+    debugger;
 
     let pageCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let page = [];
@@ -21,7 +22,7 @@ const Users = (props) => {
                 })
             }
         </div>
-        {
+        { 
             props.users.map(u => < div key={u.id} className={s.userData} >
                 <div className={s.avaFollow}>
                     <div className={s.userPhotoBox}>
@@ -30,28 +31,28 @@ const Users = (props) => {
                             <img className={s.userPhoto} src={u.photos.small !== null ? u.photos.small : userEmptyAvatar}></img>
                         </NavLink>
                     </div>
-                    <div className={s.buttonBox}>
-                        {
+                    <div className={s.buttonBox}> 
+                        { 
                             u.followed === false
-                                ? <button onClick={() => {
-                                    // axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, { withCredentials: true, headers: { 'API-KEY': '5932b879-3da4-4ae5-ae52-8eacea60088f' } })
+                                ? <button disabled={props.isToggleInProgress} onClick={() => {
+                                        props.toggleInProgress(true)
                                         usersAPI.followUser(u.id)
                                         .then(response => {
-
                                             if (response.data.resultCode === 0) {
                                                 props.followUser(u.id)
                                             }
+                                            props.toggleInProgress(false)
                                         })
                                 }}>Follow</button>
 
-                                : <button onClick={() => {
-                                    // axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, { withCredentials: true, headers: {'API-KEY': '5932b879-3da4-4ae5-ae52-8eacea60088f'} })
+                                : <button disabled={props.isToggleInProgress} onClick={() => {
+                                    props.toggleInProgress(true)
                                     usersAPI.unfollowUser(u.id)
                                         .then(response => {
-
                                             if (response.data.resultCode === 0) {
                                                 props.unfollowUser(u.id)
                                             }
+                                            props.toggleInProgress(false)
                                         })
                                 }}>Unfollow</button>
                         }

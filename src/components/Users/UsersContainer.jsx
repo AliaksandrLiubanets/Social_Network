@@ -5,7 +5,8 @@ import { followUser, // изменили импорты, убрав AC  и в re
     setTotalUsersCount, 
     setUsers, 
     toggleIsFetching, 
-    unfollowUser } from '../../redux/reducer-users';
+    unfollowUser,
+    toggleInProgress } from '../../redux/reducer-users';
 import Users from '../Users/Users';
 import Preloader from '../../common/Preloader/Preloader';
 import { usersAPI } from '../../api/api';
@@ -15,13 +16,13 @@ import { usersAPI } from '../../api/api';
 class UsersContainer extends React.Component {        
        
     componentDidMount() {  
-
-            this.props.toggleIsFetching(true) 
+                
+            this.props.toggleIsFetching(true)        
             usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
             .then(data => {                
                     this.props.toggleIsFetching(false) 
                     this.props.setUsers(data.items)
-                    this.props.setTotalUsersCount(data.totalCount)
+                    this.props.setTotalUsersCount(data.totalCount)                
             })   
     }    
     
@@ -48,7 +49,10 @@ class UsersContainer extends React.Component {
                             users={this.props.users}
                             onChangeClick={this.onChangeClick} 
                             followUser={this.props.followUser}
-                            unfollowUser={this.props.unfollowUser} />
+                            unfollowUser={this.props.unfollowUser}
+                            isToggleInProgress={this.props.isToggleInProgress}
+                            toggleInProgress={this.props.toggleInProgress}
+                             />
                             </>
     }
 
@@ -60,7 +64,8 @@ const mapStateToProps = (state) => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching        
+        isFetching: state.usersPage.isFetching,        
+        isToggleInProgress: state.usersPage.isToggleInProgress,        
     }
 }
 
@@ -101,5 +106,5 @@ const mapStateToProps = (state) => {
 // В объекте, когда свойство и значение имеют одинаковое написание, то можно писать только свойства.
 // А ф-ция connect сама внутри себя создаёт метод mapDispatchToProps, который возвращает объект, при наличии объекта внутри себя.
 
-export default connect(mapStateToProps, { followUser, unfollowUser, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching } )(UsersContainer);
+export default connect(mapStateToProps, { followUser, unfollowUser, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleInProgress } )(UsersContainer);
 
