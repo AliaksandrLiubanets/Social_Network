@@ -5,8 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { usersAPI } from '../../api/api';
 
 const Users = (props) => {
-    debugger;
-
+   
     let pageCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let page = [];
 
@@ -34,25 +33,25 @@ const Users = (props) => {
                     <div className={s.buttonBox}> 
                         { 
                             u.followed === false
-                                ? <button disabled={props.isToggleInProgress} onClick={() => {
-                                        props.toggleInProgress(true)
+                                ? <button disabled={props.followingInProgress.some(id => id === u.id )} onClick={() => {
+                                        props.toggleFollowingProgress(true, u.id)
                                         usersAPI.followUser(u.id)
                                         .then(response => {
                                             if (response.data.resultCode === 0) {
                                                 props.followUser(u.id)
                                             }
-                                            props.toggleInProgress(false)
+                                            props.toggleFollowingProgress(false, u.id)
                                         })
                                 }}>Follow</button>
 
-                                : <button disabled={props.isToggleInProgress} onClick={() => {
-                                    props.toggleInProgress(true)
+                                : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                                    props.toggleFollowingProgress(true, u.id)
                                     usersAPI.unfollowUser(u.id)
                                         .then(response => {
                                             if (response.data.resultCode === 0) {
                                                 props.unfollowUser(u.id)
                                             }
-                                            props.toggleInProgress(false)
+                                            props.toggleFollowingProgress(false, u.id)
                                         })
                                 }}>Unfollow</button>
                         }
