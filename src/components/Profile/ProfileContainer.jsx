@@ -7,7 +7,8 @@ import { setUserProfile } from '../../redux/reducer-profile'
 import Profile from './Profile'
 
 class ProfileContainer extends React.Component {
-    componentDidMount () {        
+    componentDidMount () {     
+       
         let userId = this.props.match.params.userId;
 
         if(!userId) { // В Users.jsx мы кликаем по NavLink и передаём в url u.id. В App устанавливаем в path='/profile/:userId?' переменную userId и символ ? означает, что параметр userId стал опционным - он мож быть или не быть. Его мы берём из появившегося в props нового свойства match.params благодаря использованию withRouter.  

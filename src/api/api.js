@@ -28,7 +28,13 @@ export const usersAPI = {
     getProfileUser(userId) {
         return instance.get(`profile/${userId}`)
         .then( response => response.data )
+    },
+
+    // axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, { withCredentials: true }) // при кросс-доменном запросе необходимо делать уточнение, что всё равно надо сделать запрос, несмотря на кросс-домменый запрос. Используется {withCredentials: ture}. Предварительно мы уже зарегистрировались на сайте!!!
+    getAuthData() {
+        return instance.get(`auth/me`)
     }
+
 }
 
 
