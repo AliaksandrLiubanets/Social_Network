@@ -21,4 +21,4 @@ let store = createStore(reducers, applyMiddleware(thunkMiddleWare));
 // dispatch(action);
 
 
-export default store;
+export default store; 

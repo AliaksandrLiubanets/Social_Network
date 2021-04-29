@@ -1,41 +1,39 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { followUser, // изменили импорты, убрав AC  и в reducer-users тоже.
-    setCurrentPage, 
-    setTotalUsersCount, 
-    setUsers, 
-    toggleIsFetching, 
-    unfollowUser,
-    toggleFollowingProgress,
-     } from '../../redux/reducer-users';
+import { setCurrentPage,   
+         getUsersThunkCreator,
+         followUser,
+         unfollowUser } from '../../redux/reducer-users';
 import Users from '../Users/Users';
 import Preloader from '../../common/Preloader/Preloader';
-import { usersAPI } from '../../api/api';
-
-
 
 class UsersContainer extends React.Component {        
        
     componentDidMount() {  
+
+        this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
                 
-            this.props.toggleIsFetching(true)        
-            usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-            .then(data => {                
-                    this.props.toggleIsFetching(false) 
-                    this.props.setUsers(data.items)
-                    this.props.setTotalUsersCount(data.totalCount)                
-            })   
+        //     this.props.toggleIsFetching(true)        
+        //     usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+        //     .then(data => {                
+        //             this.props.toggleIsFetching(false) 
+        //             this.props.setUsers(data.items)
+        //             this.props.setTotalUsersCount(data.totalCount)                
+        //     })   
     }    
     
     onChangeClick = (pageNumber) => {
-            this.props.toggleIsFetching(true)
-            this.props.setCurrentPage(pageNumber);
-            // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {withCredentials: true}) :
-            usersAPI.getUsers(pageNumber, this.props.pageSize)
-            .then(data => {                 
-                    this.props.toggleIsFetching(false)
-                    this.props.setUsers(data.items)
-            })   
+
+        this.props.getUsersThunkCreator(pageNumber, this.props.pageSize)
+
+        //     this.props.toggleIsFetching(true)
+        //     this.props.setCurrentPage(pageNumber);
+        //     // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {withCredentials: true}) :
+        //     usersAPI.getUsers(pageNumber, this.props.pageSize)
+        //     .then(data => {                 
+        //             this.props.toggleIsFetching(false)
+        //             this.props.setUsers(data.items)
+        //     })   
     }    
             
     render = () => {                    
@@ -50,11 +48,7 @@ class UsersContainer extends React.Component {
                             onChangeClick={this.onChangeClick} 
                             followUser={this.props.followUser}
                             unfollowUser={this.props.unfollowUser}
-                        //     isToggleInProgress={this.props.isToggleInProgress}
                             isFetching={this.props.isFetching}
-                        //     toggleInProgress={this.props.toggleInProgress}
-                        //     toggleIsFetching={this.props.toggleIsFetching}
-                            toggleFollowingProgress={this.props.toggleFollowingProgress} 
                             followingInProgress={this.props.followingInProgress}
                              />
                             </>
@@ -69,7 +63,6 @@ const mapStateToProps = (state) => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,        
-        // isToggleInProgress: state.usersPage.isToggleInProgress,        
         followingInProgress: state.usersPage.followingInProgress,        
     }
 }
@@ -111,5 +104,7 @@ const mapStateToProps = (state) => {
 // В объекте, когда свойство и значение имеют одинаковое написание, то можно писать только свойства.
 // А ф-ция connect сама внутри себя создаёт метод mapDispatchToProps, который возвращает объект, при наличии объекта внутри себя.
 
-export default connect(mapStateToProps, { followUser, unfollowUser, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleFollowingProgress } )(UsersContainer);
+export default connect(mapStateToProps, { 
+        followUser, unfollowUser,  
+        setCurrentPage, getUsersThunkCreator } )(UsersContainer);
 
