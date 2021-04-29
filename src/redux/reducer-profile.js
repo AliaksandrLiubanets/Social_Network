@@ -1,3 +1,5 @@
+import { usersAPI } from "../api/api";
+
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -31,11 +33,11 @@ const reducerProfile = (state = initialState, action) => {
                 avatar: 'https://www.meme-arsenal.com/memes/72e09695c1914bab6839f87a78110201.jpg',
             }
 
-            return {                                       //Возвращаем новый созданный объект
+            return {                                       
                 ...state,                                   //Делаем поверхностное копирование state
                 newPostText: '',                            //В качестве нового свойства объекта создаем newPostText и присваиваем значение ''
                 postsData: [...state.postsData, newPost]    //Также создаём ещё одно свойство нового объекта со значением массива. Делаем копию массива state.postsData                                                             
-            }                                               //и добавляем в этот массив новое значение newPost
+            }                                               
 
         case SET_USER_PROFILE:
             return {
@@ -50,9 +52,14 @@ const reducerProfile = (state = initialState, action) => {
 
 export const addPostActionCreator = () => ({ type: ADD_POST });
 export const updateNewPostTextActionCreator = (text) => ({ type: UPDATE_NEW_POST_TEXT, newText: text });
-export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
+export const setUserProfileAC = (profile) => ({ type: SET_USER_PROFILE, profile });
 
-
+export const setUserProfileThunkCreator = (userId) => (dispatch) => {
+    usersAPI.getProfileUser(userId)
+        .then( data => {                  
+            dispatch(setUserProfileAC(data))
+        })
+}
 
 export default reducerProfile;
 
