@@ -6,6 +6,7 @@ import { setCurrentPage,
          unfollowUser } from '../../redux/reducer-users';
 import Users from '../Users/Users';
 import Preloader from '../../common/Preloader/Preloader';
+import { HOCRedirectToLogin } from '../../HOC/HOCRedirectToLogin';
 
 class UsersContainer extends React.Component {        
        
@@ -104,7 +105,19 @@ const mapStateToProps = (state) => {
 // В объекте, когда свойство и значение имеют одинаковое написание, то можно писать только свойства.
 // А ф-ция connect сама внутри себя создаёт метод mapDispatchToProps, который возвращает объект, при наличии объекта внутри себя.
 
-export default connect(mapStateToProps, { 
+
+
+
+// let withRedirectToLoginUsers = HOCRedirectToLogin(UsersContainer)
+
+// export default connect(mapStateToProps, { 
+//         followUser, unfollowUser,  
+//         setCurrentPage, getUsersThunkCreator } )(withRedirectToLoginUsers);
+
+//Т.к. connect возвращает контейнерную компоненту, то её можно передать в качестве аргумента в ф-цию HOCRedirectToLogin  
+//То же самое:
+
+export default HOCRedirectToLogin(connect(mapStateToProps, { 
         followUser, unfollowUser,  
-        setCurrentPage, getUsersThunkCreator } )(UsersContainer);
+        setCurrentPage, getUsersThunkCreator } )(UsersContainer))
 

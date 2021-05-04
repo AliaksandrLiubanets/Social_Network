@@ -2,14 +2,23 @@ import { connect } from "react-redux"
 import { Redirect } from "react-router"
 import React from 'react'
 
-const HOCRedirectToLogin = (Component) => {
+let mapStateToProps = (state) => {
+    return {
+        isAuth: state.auth.isAuth
+    }
+}
+
+export const HOCRedirectToLogin = (Component) => {
     class WrapperComponent extends React.Component {
         render = () => {
             if (!this.props.isAuth) return <Redirect to='/login'/>
             return <Component {...this.props} />
         }
     }
-    return WrapperComponent
+
+    let ConnectedWrapperComponent = connect(mapStateToProps)(WrapperComponent)
+
+    return ConnectedWrapperComponent
 }
 
 // export default HOCRedirectToLogin
@@ -22,7 +31,7 @@ const HOCRedirectToLogin = (Component) => {
 //     return WrapperComponent
 // }
 
-export default HOCRedirectToLogin
+// export default HOCRedirectToLogin
 
 
 

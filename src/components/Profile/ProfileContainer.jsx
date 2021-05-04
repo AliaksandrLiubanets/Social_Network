@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Redirect, withRouter } from 'react-router'
-import HOCRedirectToLogin from '../../HOC/HOCRedirectToLogin'
+import { withRouter } from 'react-router'
+import { HOCRedirectToLogin } from '../../HOC/HOCRedirectToLogin'
 import { setUserProfileThunkCreator } from '../../redux/reducer-profile'
 import Profile from './Profile'
 
@@ -29,7 +29,7 @@ class ProfileContainer extends React.Component {
 const mapStateToProps = (state) => {
     return {
         profile: state.profilePage.profile,
-        isAuth: state.auth.isAuth       
+        // isAuth: state.auth.isAuth       
     }
 }
 
@@ -56,12 +56,21 @@ const mapDispatchToProps = (dispatch) => {
 //     return WrapperComponent
 // }
 
-let WithRedirectToLoginProfile = HOCRedirectToLogin(ProfileContainer)
 
 // const ProfileContainer = connect(mapStateToProps, mapDispatchToProps )(ProfileAPIContainer)
 
 // export default ProfileContainer
 
-const WithURLDataContainerComponent = withRouter(WithRedirectToLoginProfile)
 
-export default connect(mapStateToProps, mapDispatchToProps )(WithURLDataContainerComponent)
+// let WithRedirectToLoginProfile = HOCRedirectToLogin(ProfileContainer)
+
+// const WithURLDataContainerComponent = withRouter(WithRedirectToLoginProfile)
+
+// export default connect(mapStateToProps, mapDispatchToProps )(WithURLDataContainerComponent)
+
+
+//Т.к. connect возвращает контейнерную компоненту, то её можно передать в качестве аргумента в ф-цию HOCRedirectToLogin
+//hoc withRouter тоже возвращает контейнерную компоненту. В связи с этим делаем сложную вложенность, но короче.  
+//То же самое:
+
+export default withRouter(HOCRedirectToLogin(connect(mapStateToProps, mapDispatchToProps )(ProfileContainer)))

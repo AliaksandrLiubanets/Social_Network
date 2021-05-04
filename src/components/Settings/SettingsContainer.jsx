@@ -1,14 +1,12 @@
-import { connect } from "react-redux"
-import { Redirect } from "react-router"
-import HOCRedirectToLogin from "../../HOC/HOCRedirectToLogin"
+import { HOCRedirectToLogin } from "../../HOC/HOCRedirectToLogin"
 import Settings from "./Settings"
 
 
-const mapStateToProps = (state) => {
-    return {
-        isAuth: state.auth.isAuth
-    }
-}
+// const mapStateToProps = (state) => {
+//     return {
+//         isAuth: state.auth.isAuth
+//     }
+// }
 
 // const AuthRedirectComponent = (props) => {
 //     if (props.isAuth) return <Redirect to='/login'/>
@@ -23,10 +21,10 @@ const mapStateToProps = (state) => {
 //     return WrapperComponent
 // }
 
-let WithRedirectToLoginSettingsContainer = HOCRedirectToLogin(Settings)
+let withRedirectToLoginSettings = HOCRedirectToLogin(Settings)
 
-const SettingsContainer = connect(mapStateToProps)(WithRedirectToLoginSettingsContainer);
+// const SettingsContainer = connect(mapStateToProps)(withRedirectToLoginSettings);
 
-export default SettingsContainer;
+export default withRedirectToLoginSettings;
 
 

@@ -1,7 +1,7 @@
 import Dialogs from './Dialogs';
 import { updateNewMessageBodyActionCreator, sendMessageActionCreator, addSomeAvatarAndNameActionCreator } from '../../redux/reducer-dialogs';
 import { connect } from 'react-redux';
-import HOCRedirectToLogin from '../../HOC/HOCRedirectToLogin';
+import { HOCRedirectToLogin } from '../../HOC/HOCRedirectToLogin';
 
 // const DialogsContainer = () => {
 
@@ -31,7 +31,7 @@ const mapStateToProps = (state) => {
     return {
         state: state.dialogsPage,
         newMessageBody: state.dialogsPage.newMessageBody,
-        isAuth: state.auth.isAuth
+        // isAuth: state.auth.isAuth
     }
 }
 
@@ -60,8 +60,17 @@ const mapDispatchToProps = (dispatch) => {
 //     return WrapperComponent
 // }
 
-let WithRedirectToLoginDialogs = HOCRedirectToLogin(Dialogs)
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(WithRedirectToLoginDialogs);
+// let WithRedirectToLoginDialogs = HOCRedirectToLogin(Dialogs)
+
+// const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(WithRedirectToLoginDialogs);
+
+// export default DialogsContainer;
+
+
+//Т.к. connect возвращает контейнерную компоненту, то её можно передать в качестве аргумента в ф-цию HOCRedirectToLogin  
+//То же самое:
+
+const DialogsContainer = HOCRedirectToLogin(connect(mapStateToProps, mapDispatchToProps)(Dialogs));
 
 export default DialogsContainer;
