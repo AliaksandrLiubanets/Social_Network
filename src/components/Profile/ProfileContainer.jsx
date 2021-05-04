@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect, withRouter } from 'react-router'
+import HOCRedirectToLogin from '../../HOC/HOCRedirectToLogin'
 import { setUserProfileThunkCreator } from '../../redux/reducer-profile'
 import Profile from './Profile'
 
@@ -21,13 +22,8 @@ class ProfileContainer extends React.Component {
     }
 
     render = () => {   
-        if (this.props.isAuth) return <Redirect to='./login' />
-        return <>
-        <Profile {...this.props} />
-        </>
-        
-    }
-    
+        return <Profile {...this.props} />      
+    }    
 }
 
 const mapStateToProps = (state) => {
@@ -45,10 +41,27 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
+// const AuthRedirectComponent = (props) => {
+//     if (props.isAuth ) return <Redirect to='./login'/>
+//     return <ProfileContainer {...props}/>
+// }
+
+// const HOCRedirectToLogin = (Component) => {
+//     class WrapperComponent extends React.Component {
+//         render = () => {
+//             if (!this.props.isAuth) return <Redirect to='/login'/>
+//             return <Component {...this.props} />
+//         }
+//     }
+//     return WrapperComponent
+// }
+
+let WithRedirectToLoginProfile = HOCRedirectToLogin(ProfileContainer)
+
 // const ProfileContainer = connect(mapStateToProps, mapDispatchToProps )(ProfileAPIContainer)
 
 // export default ProfileContainer
 
-const WithURLDataContainerComponent = withRouter(ProfileContainer)
+const WithURLDataContainerComponent = withRouter(WithRedirectToLoginProfile)
 
 export default connect(mapStateToProps, mapDispatchToProps )(WithURLDataContainerComponent)

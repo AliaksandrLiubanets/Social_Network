@@ -1,6 +1,7 @@
 import Dialogs from './Dialogs';
 import { updateNewMessageBodyActionCreator, sendMessageActionCreator, addSomeAvatarAndNameActionCreator } from '../../redux/reducer-dialogs';
 import { connect } from 'react-redux';
+import HOCRedirectToLogin from '../../HOC/HOCRedirectToLogin';
 
 // const DialogsContainer = () => {
 
@@ -44,9 +45,23 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(sendMessageActionCreator());
         }
     }
-}
+} 
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+// const AuthRedirectComponent = (props) => {
+//     if (props.isAuth ) return <Redirect to='./login'/>
+//     return <Dialogs {...props}/>
+// }
 
+// const HOCRedirectToLogin = (Component) => {
+//     let WrapperComponent = (props) => {
+//         if (!props.isAuth) return <Redirect to='/login'/>
+//         return <Component {...props} />
+//     }
+//     return WrapperComponent
+// }
+
+let WithRedirectToLoginDialogs = HOCRedirectToLogin(Dialogs)
+
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(WithRedirectToLoginDialogs);
 
 export default DialogsContainer;
