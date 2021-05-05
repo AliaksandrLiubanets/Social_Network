@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
+import { compose } from 'redux'
 import { HOCRedirectToLogin } from '../../HOC/HOCRedirectToLogin'
 import { setUserProfileThunkCreator } from '../../redux/reducer-profile'
 import Profile from './Profile'
@@ -73,4 +74,11 @@ const mapDispatchToProps = (dispatch) => {
 //hoc withRouter тоже возвращает контейнерную компоненту. В связи с этим делаем сложную вложенность, но короче.  
 //То же самое:
 
-export default withRouter(HOCRedirectToLogin(connect(mapStateToProps, mapDispatchToProps )(ProfileContainer)))
+// export default HOCRedirectToLogin(withRouter(connect(mapStateToProps, mapDispatchToProps )(ProfileContainer)))
+
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withRouter,
+    HOCRedirectToLogin
+)(ProfileContainer)
+

@@ -7,6 +7,7 @@ import { setCurrentPage,
 import Users from '../Users/Users';
 import Preloader from '../../common/Preloader/Preloader';
 import { HOCRedirectToLogin } from '../../HOC/HOCRedirectToLogin';
+import { compose } from 'redux';
 
 class UsersContainer extends React.Component {        
        
@@ -117,7 +118,12 @@ const mapStateToProps = (state) => {
 //Т.к. connect возвращает контейнерную компоненту, то её можно передать в качестве аргумента в ф-цию HOCRedirectToLogin  
 //То же самое:
 
-export default HOCRedirectToLogin(connect(mapStateToProps, { 
-        followUser, unfollowUser,  
-        setCurrentPage, getUsersThunkCreator } )(UsersContainer))
+// export default HOCRedirectToLogin(connect(mapStateToProps, { 
+//         followUser, unfollowUser,  
+//         setCurrentPage, getUsersThunkCreator } )(UsersContainer))
+
+export default compose(
+    connect(mapStateToProps, { followUser, unfollowUser, setCurrentPage, getUsersThunkCreator } ),
+    HOCRedirectToLogin
+)(UsersContainer)
 
