@@ -26,15 +26,31 @@ export const usersAPI = {
 
     // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`, {withCredentials: true})
     getProfileUser(userId) {
-        return instance.get(`profile/${userId}`)
-        .then( response => response.data )
+        console.warn('Obsolete method. Please use profileAPI object')
+        return profileAPI.getProfile(userId)
     },
 
     // axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, { withCredentials: true }) // при кросс-доменном запросе необходимо делать уточнение, что всё равно надо сделать запрос, несмотря на кросс-домменый запрос. Используется {withCredentials: ture}. Предварительно мы уже зарегистрировались на сайте!!!
     getAuthData() {
         return instance.get(`auth/me`)
     }
+}
 
+export const profileAPI = {
+    getProfile(userId) {
+        return instance.get(`profile/${userId}`)
+        .then(response => {
+            return response.data
+        })
+    },
+
+    getStatus(userId) {
+        return instance.get(`profile/status/${userId}`)
+    },
+
+    updateStatus(status) {
+        return instance.put(`profile/status`, { status: status} ) // payload request - вместе с запросом отправляем объект со св-м status, в который передадим строку из UI.
+    }
 }
 
 

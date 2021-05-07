@@ -1,5 +1,4 @@
 import Preloader from '../../../common/Preloader/Preloader';
-import AboutMe from './AboutMe/AboutMe';
 import FullName from './FullName/FullName';
 import Job from './Job/Job';
 import JobDescription from './JobDescription/JobDescription';
@@ -22,9 +21,10 @@ const ProfileInfo = (props) => {
                 <Photo photo={props.profile.photos.large} />
                 <FullName fullName={props.profile.fullName} />                
             </div>
-            <ProfileStatus status={props.profile.aboutMe} />
+            <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
             <Job job={props.profile.lookingForAJob} />
-            <JobDescription jobDescription={props.profile.lookingForAJobDescription} />
+            <JobDescription jobDescription={props.profile.lookingForAJobDescription} /> 
+            <div>UserId: {props.profile.userId}</div>           
         </div>
     </>
 }
