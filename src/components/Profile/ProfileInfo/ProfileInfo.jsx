@@ -13,9 +13,6 @@ const ProfileInfo = (props) => {
     }
 
     return <>
-        {/* <div >
-            <img src="https://expresstricks.com/wp-content/uploads/2019/04/comments-for-beautiful-pictures.jpg"></img>
-        </div> */}
         <div className={s.descriptionBlock}>
             <div className={s.photoName}>
                 <Photo photo={props.profile.photos.large} />
