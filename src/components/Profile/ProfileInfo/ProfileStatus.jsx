@@ -30,9 +30,19 @@ class ProfileStatus extends React.Component {
 
     handleFocus = (event) => {
         event.target.select()
-    }    
+    }   
+    
+    componentDidUpdate(prevProps, prevState) {
+        if(this.props.status !== prevProps.status) {
+            this.setState({
+                status: this.props.status
+            })
+        }
+        console.log('componentDidUpdate')
+    }
 
-    render = () => {        
+    render = () => {  
+        console.log('render')      
         return <>
             {
                 !this.state.editMode
