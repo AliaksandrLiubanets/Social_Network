@@ -12,9 +12,10 @@
 .login, .authorizedUser {
   color: white;
   font-size: bold;
-  float: right;
+  float: left;
   padding-top: 5px;
-  padding-right: 30px;  
+  /* padding-right: 30px;   */
+  padding-left: 5px;
 }
  
 .authorizedUser {
@@ -26,9 +27,9 @@
 .authorizedUser img {
   width: 30px;
   height: 30px;
-  float: right;
+  float: left;
 }
 
 .userAvatar {
-  float: right; 
+  float: left; 
 }

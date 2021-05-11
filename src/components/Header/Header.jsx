@@ -6,7 +6,7 @@ import userEmptyAvatar from '../../assets/userEmptyAvatar.png'
 const Header = (props) => {  
 
   return <header className={s.header}>
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6_lULuLhKRsxlcn_z3OW5mU4IV1v18fTkEg&usqp=CAU"></img>
+    {/* <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6_lULuLhKRsxlcn_z3OW5mU4IV1v18fTkEg&usqp=CAU"></img> */}
 
     {
       !props.isAuth
