@@ -3,6 +3,7 @@ import s from './Users.module.css';
 import userEmptyAvatar from '../../assets/userEmptyAvatar.png'
 import { NavLink } from 'react-router-dom';
 import { usersAPI } from '../../api/api';
+import Pagination from './Pagination/Pagination';
 
 const Users = (props) => {
    
@@ -15,11 +16,12 @@ const Users = (props) => {
 
     return <div className={s.usersBox}>
         <div className={s.paginationBox}>
-            {
+            <Pagination currentPage={props.currentPage} pageSize={props.pageSize} totalUsersCount={props.totalUsersCount} onChangeClick={props.onChangeClick} />
+            {/* {
                 page.map(p => {
-                    return <span onClick={() => { props.onChangeClick(p) }} className={props.currentPage === p ? s.selectedPage : ''}>{p}</span>
+                    return <span key={p} onClick={() => { props.onChangeClick(p) }} className={props.currentPage === p ? s.selectedPage : ''}>{p}</span>
                 })
-            }
+            } */}
         </div>
         { 
             props.users.map(u => < div key={u.id} className={s.userData} >

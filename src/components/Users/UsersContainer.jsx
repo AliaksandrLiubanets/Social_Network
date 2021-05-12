@@ -29,14 +29,14 @@ class UsersContainer extends React.Component {
             { this.props.isFetching ? <Preloader />  : null } 
             
             <Users   totalUsersCount={this.props.totalUsersCount} 
-                            pageSize={this.props.pageSize}
-                            currentPage={this.props.currentPage}
-                            users={this.props.users}
-                            onChangeClick={this.onChangeClick} 
-                            followUser={this.props.followUser}
-                            unfollowUser={this.props.unfollowUser}
-                            isFetching={this.props.isFetching}
-                            followingInProgress={this.props.followingInProgress}
+                     pageSize={this.props.pageSize}
+                     currentPage={this.props.currentPage}
+                     users={this.props.users}
+                     onChangeClick={this.onChangeClick} 
+                     followUser={this.props.followUser}
+                     unfollowUser={this.props.unfollowUser}
+                     isFetching={this.props.isFetching}
+                     followingInProgress={this.props.followingInProgress}
                              />
                             </>
     }

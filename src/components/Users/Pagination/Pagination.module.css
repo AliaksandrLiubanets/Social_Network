@@ -1,0 +1,15 @@
+
+.paginationBox {
+    padding: 10px;
+    background-color: aqua;
+    /* margin: auto; */
+}
+
+.paginationBox span {
+    padding: 2px;
+    cursor: pointer;
+}
+
+.selectedPage {
+    font-weight: bold;    
+}
