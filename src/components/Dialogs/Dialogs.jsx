@@ -3,6 +3,7 @@ import s from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
 import { Redirect } from 'react-router';
+import ReduxDialogsForm from './DialogsForm';
 
 const Dialogs = (props) => {
     
@@ -19,6 +20,10 @@ const Dialogs = (props) => {
         let body = event.target.value;
         props.changeText(body);
     }
+
+    const onSubmit = (formData) => {
+        console.log(formData)
+    }
     
     return (        
         <div className={s.dialogs}>
@@ -30,14 +35,15 @@ const Dialogs = (props) => {
             </div>
             <div className={s.blockTextarea}>
                 <div>
-                    <textarea onChange={onSendMessageClick} 
+                    <ReduxDialogsForm onSubmit={onSubmit}/>
+                    {/* <textarea onChange={onSendMessageClick} 
                             placeholder='Send your message...' 
                             value={props.newMessageBody} 
-                            autoFocus/>  
+                            autoFocus/>   */}
                 </div>
-                <div>
+                {/* <div>
                     <button onClick={onAddSomeAvatarAndNameWithMessageClick} >Send message</button>
-                </div>
+                </div> */}
             </div>
             
         </div>
