@@ -22,7 +22,7 @@ const Dialogs = (props) => {
     }
 
     const onSubmit = (formData) => {
-        console.log(formData)
+        props.setDialogsMessage(formData.message)
     }
     
     return (        
@@ -34,6 +34,9 @@ const Dialogs = (props) => {
                 {messagesElements}
             </div>
             <div className={s.blockTextarea}>
+                <div>
+                    {props.dialogsMessage}
+                </div>
                 <div>
                     <ReduxDialogsForm onSubmit={onSubmit}/>
                     {/* <textarea onChange={onSendMessageClick} 

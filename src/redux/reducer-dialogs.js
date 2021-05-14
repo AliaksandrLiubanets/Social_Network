@@ -1,6 +1,7 @@
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
 const SEND_MESSAGE = 'SEND-MESSAGE';
 const ADD_SOME_AVATAR_AND_NAME = 'ADD-SOME-AVATAR-AND-NAME';
+const SET_DIALOGS_MESSAGE = 'SET_DIALOGS_MESSAGE';
 
 let initialState = {
         dialogsData: [
@@ -20,7 +21,9 @@ let initialState = {
             { id: 6, message: 'Valera Say: Yo' },
         ],
         newMessageBody: '',
-        someAvatarAndName: { id: 7, name: 'Somebody', avatar: 'https://live.warthunder.com/style/img/no_avatar.jpg' }    
+        someAvatarAndName: { id: 7, name: 'Somebody', avatar: 'https://live.warthunder.com/style/img/no_avatar.jpg' },
+        dialogsMessage: ''   
+
 }
 
 const reducerDialogs = (state = initialState, action) => {
@@ -55,6 +58,13 @@ const reducerDialogs = (state = initialState, action) => {
             let someAvatarAndName = state.someAvatarAndName;
             state.dialogsData.push(someAvatarAndName);   
             return state;
+
+        case SET_DIALOGS_MESSAGE: 
+            return {
+                ...state,
+                dialogsMessage: action.message
+            }
+
         default:
             return state;
     }
@@ -65,5 +75,7 @@ export const updateNewMessageBodyActionCreator = (body) => ({ type: UPDATE_NEW_M
 export const sendMessageActionCreator = () => ({ type: SEND_MESSAGE });
 
 export const addSomeAvatarAndNameActionCreator = () => ({ type: ADD_SOME_AVATAR_AND_NAME });
+
+export const setDialogsMessageAC = (message) => ({type: SET_DIALOGS_MESSAGE, message})
 
 export default reducerDialogs;

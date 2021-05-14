@@ -1,5 +1,5 @@
 import Dialogs from './Dialogs';
-import { updateNewMessageBodyActionCreator, sendMessageActionCreator, addSomeAvatarAndNameActionCreator } from '../../redux/reducer-dialogs';
+import { updateNewMessageBodyActionCreator, sendMessageActionCreator, addSomeAvatarAndNameActionCreator, setDialogsMessageAC } from '../../redux/reducer-dialogs';
 import { connect } from 'react-redux';
 import { HOCRedirectToLogin } from '../../HOC/HOCRedirectToLogin';
 import { compose } from 'redux';
@@ -32,6 +32,7 @@ const mapStateToProps = (state) => {
     return {
         state: state.dialogsPage,
         newMessageBody: state.dialogsPage.newMessageBody,
+        dialogsMessage: state.dialogsPage.dialogsMessage
         // isAuth: state.auth.isAuth
     }
 }
@@ -44,6 +45,9 @@ const mapDispatchToProps = (dispatch) => {
         addAvatarAndMessage: () => {
             dispatch(addSomeAvatarAndNameActionCreator());
             dispatch(sendMessageActionCreator());
+        },
+        setDialogsMessage: (message) => {
+            dispatch(setDialogsMessageAC(message))
         }
     }
 } 
