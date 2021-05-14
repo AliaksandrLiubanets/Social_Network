@@ -1,7 +1,7 @@
 import React from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { Field } from 'redux-form'
 
-const DialogsForm = (props) => {
+let MessageSend = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
@@ -14,8 +14,4 @@ const DialogsForm = (props) => {
     )
 }
 
-const ReduxDialogsForm = reduxForm({
-    form: 'dialogsMessage'
-})(DialogsForm)
-
-export default ReduxDialogsForm
+export default MessageSend
