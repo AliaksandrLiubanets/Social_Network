@@ -1,8 +1,6 @@
 import React from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem';
-import Message from './Message/Message';
-import { Redirect } from 'react-router';
 import MessageSend from '../../common/Preloader/MessageSend';
 import { reduxForm } from 'redux-form'
 
@@ -11,7 +9,7 @@ const Dialogs = (props) => {
     let dialogsElements =
         props.dialogsData.map(d => <DialogItem key={d.id} avatar={d.avatar} name={d.name} id={d.id} message={d.message}/>)
     
-    let addMessage = (formData) => {  // - click button
+    let addMessage = (formData) => { 
         props.addMessage(formData.message);  
     }
     
