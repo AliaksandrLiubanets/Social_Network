@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem';
-import MessageSend from '../../common/Preloader/MessageSend';
+import MessageSend from '../../common/formControls/MessageSend';
 import { reduxForm } from 'redux-form'
 
 const Dialogs = (props) => {

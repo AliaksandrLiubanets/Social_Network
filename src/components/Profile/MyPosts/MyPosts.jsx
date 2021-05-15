@@ -2,7 +2,7 @@ import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Posts/Post';
 import { reduxForm } from 'redux-form'
-import MessageSend from '../../../common/Preloader/MessageSend';
+import MessageSend from '../../../common/formControls/MessageSend';
 
 const MyPosts = (props) => {
   
