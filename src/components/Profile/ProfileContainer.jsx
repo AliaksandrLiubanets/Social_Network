@@ -1,48 +1,53 @@
-import axios from 'axios'
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import { setUserProfile } from '../../redux/reducer-profile'
+import { compose } from 'redux'
+import { HOCRedirectToLogin } from '../../HOC/HOCRedirectToLogin'
+import { getStatusThunkCreator, setUserProfileThunkCreator, updateStatusThunkCreator } from '../../redux/reducer-profile'
 import Profile from './Profile'
 
 class ProfileContainer extends React.Component {
-    componentDidMount () {            
+    componentDidMount () {     
+       
         let userId = this.props.match.params.userId;
 
-        if(!userId) { // В App path='/profile/:userId?' символ ? означает, что параметр userId сттал опционным - он мож быть или не быть. А значит в переменной userId, 
-            userId = 2; // что инициализирована выше, не передано значение. Через Если мы не кликнем на аву user и захотим загрузить страницу Profile, чтобы она загрузилась присваимаем userId = 2, иначе в  
+        if(!userId) { 
+            userId = 2;  
         }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-        .then( response => {            
-            this.props.setUserProfile(response.data)
-        })
+        
+        this.props.setUserProfile(userId)   
+        this.props.getStatus(userId)        
     }
 
-    render = () => {        
-        return <>
-        <Profile {...this.props} />
-        </>
-    }
+    render = () => {   
+        return <Profile {...this.props} />      
+    }    
 }
 
 const mapStateToProps = (state) => {
     return {
-        profile: state.profilePage.profile       
+        profile: state.profilePage.profile,
+        status: state.profilePage.status  
     }
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         setUserProfile: (profile) => {
-//             dispatch(setUserProfile(profile))
-//         }
-//     }
-// }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setUserProfile: (userId) => {
+            dispatch(setUserProfileThunkCreator(userId))
+        },
+        getStatus: (userId) => {
+            dispatch(getStatusThunkCreator(userId))
+        },
+        updateStatus: (status) => {
+            dispatch(updateStatusThunkCreator(status))
+        }
+    }
+}
 
-// const ProfileContainer = connect(mapStateToProps, mapDispatchToProps )(ProfileAPIContainer)
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withRouter,
+    HOCRedirectToLogin
+)(ProfileContainer)
 
-// export default ProfileContainer
-
-const WithURLDataContainerComponent = withRouter(ProfileContainer)
-
-export default connect(mapStateToProps, {setUserProfile} )(WithURLDataContainerComponent)

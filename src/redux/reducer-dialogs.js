@@ -33,17 +33,11 @@ const reducerDialogs = (state = initialState, action) => {
                 newMessageBody: action.newBody
             }
          
-        case SEND_MESSAGE: 
-            // let stateCopy = {...state};         
+        case SEND_MESSAGE:      
             let newMessage = {
             id: 7,
             message: state.newMessageBody
             }
-
-            // stateCopy.messagesData = [...state.messagesData];
-            // stateCopy.messagesData.push(newMessage);
-            // stateCopy.newMessageBody = '';             
-            // return stateCopy;
 
             return {
                 ...state,
