@@ -1,4 +1,4 @@
-import Preloader from '../../../common/Preloader/Preloader';
+import Preloader from '../../../common/Preloader';
 import FullName from './FullName/FullName';
 import Job from './Job/Job';
 import JobDescription from './JobDescription/JobDescription';

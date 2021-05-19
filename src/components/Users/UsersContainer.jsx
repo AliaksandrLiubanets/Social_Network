@@ -5,7 +5,7 @@ import { setCurrentPage,
          followUser,
          unfollowUser } from '../../redux/reducer-users';
 import Users from '../Users/Users';
-import Preloader from '../../common/Preloader/Preloader';
+import Preloader from '../../common/Preloader';
 import { HOCRedirectToLogin } from '../../HOC/HOCRedirectToLogin';
 import { compose } from 'redux';
 

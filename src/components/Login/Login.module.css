@@ -1,0 +1,12 @@
+.loginPage {
+    padding: 10px;    
+}
+
+.buttonClear {
+    margin-left: 10px;
+}
+
+.error {
+    color: rgb(103, 5, 5);
+    font-weight: bold;
+}
