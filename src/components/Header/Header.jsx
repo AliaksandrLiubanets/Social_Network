@@ -29,9 +29,9 @@ const Header = (props) => {
           </div>
         </NavLink>
     }
-
   </header>
 }
+// доделать, чтобы при клике на NavLink to={'./profile' + userId} был переход на страницу профиля с залогигиным userId.
 
 
 export default Header;

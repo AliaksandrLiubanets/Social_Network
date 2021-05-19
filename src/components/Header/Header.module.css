@@ -12,6 +12,7 @@
 .login, .authorizedUser {
   color: white;
   font-size: bold;
+
   float: left;
   padding-top: 5px;
   /* padding-right: 30px;   */
@@ -31,5 +32,5 @@
 }
 
 .userAvatar {
-  float: left; 
+  float: left;
 }
