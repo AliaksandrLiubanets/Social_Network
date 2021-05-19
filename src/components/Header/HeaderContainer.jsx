@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { connect } from 'react-redux';
 import { setAuthUserDataThunkCreator, setUserAvatar } from '../../redux/reducer-auth';

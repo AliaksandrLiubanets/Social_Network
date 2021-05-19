@@ -12,16 +12,11 @@
 .login, .authorizedUser {
   color: white;
   font-size: bold;
-<<<<<<< HEAD
-  float: right;
-  padding-top: 5px;
-  padding-right: 30px;  
-=======
+
   float: left;
   padding-top: 5px;
   /* padding-right: 30px;   */
   padding-left: 5px;
->>>>>>> training
 }
  
 .authorizedUser {
@@ -33,17 +28,9 @@
 .authorizedUser img {
   width: 30px;
   height: 30px;
-<<<<<<< HEAD
-  float: right;
-}
-
-.userAvatar {
-  float: right; 
-=======
   float: left;
 }
 
 .userAvatar {
-  float: left; 
->>>>>>> training
+  float: left;
 }
