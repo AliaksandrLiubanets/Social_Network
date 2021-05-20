@@ -53,6 +53,12 @@ export const profileAPI = {
     }
 }
 
+export const authAPI = {
+    getAuthData() {
+        return instance.get(`auth/me`) 
+    }
+}
+
 
 
 
