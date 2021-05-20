@@ -27,7 +27,7 @@ let LoginForm = (props) => {
     debugger;
     return <>
         <form onSubmit={handleSubmit}>
-            <div><Field component={inputField} name='login' validate={[required, minLength4, maxLength30]} type="text" placeholder='Login' /></div>
+            <div><Field component={inputField} name='email' validate={[required, minLength4, maxLength30]} type="email" placeholder='Email' /></div>
             <div><Field component={inputField} name='password' validate={[required, alphaNumeric, minLength10]} type="password" placeholder='Password' /></div>
             <div><Field component='input' name='rememberMe' type="checkbox" />remember me</div>
             <button className={s.button} type='submit' disabled={ pristine || submitting} >Send</button>
@@ -40,8 +40,10 @@ LoginForm = reduxForm({form: 'loginForm'})(LoginForm)
 
 const Login = (props) => {
     const funSubmit = (formData) => {
-        
-        props.setSubmitedData(formData)
+        let {email, password, rememberMe} = formData
+        props.setSubmitedData(email, password, rememberMe)
+        // props.setUserIdAuth()
+
     }
     return <div className={s.loginPage}>
         <h1>LOGIN</h1>
@@ -54,9 +56,12 @@ const mapStateToProps = (state) => {
     return {
         login: state.loginPage.data.login,
         password: state.loginPage.data.password,
-        rememberMe: state.loginPage.data.rememberMe
+        rememberMe: state.loginPage.data.rememberMe,
+        userId: state.loginPage.userId
     }
 }
 
-export default connect(mapStateToProps, {setSubmitedData})(Login)
+export default connect( mapStateToProps, {setSubmitedData})(Login)
+
+// export default Login
 

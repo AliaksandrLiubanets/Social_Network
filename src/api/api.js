@@ -49,13 +49,21 @@ export const profileAPI = {
     },
 
     updateStatus(status) {
-        return instance.put(`profile/status`, { status: status} ) // payload request - вместе с запросом отправляем объект со св-м status, в который передадим строку из UI.
+        return instance.put(`profile/status`, { status: status } ) // payload request - вместе с запросом отправляем объект со св-м status, в который передадим строку из UI.
     }
 }
 
 export const authAPI = {
     getAuthData() {
         return instance.get(`auth/me`) 
+    },
+
+    login(email, password, rememberMe) {
+        return instance.post(`auth/login`, { email, password, rememberMe } )
+    },
+
+    logout() {
+        return instance.delete(`auth/login`)
     }
 }
 
