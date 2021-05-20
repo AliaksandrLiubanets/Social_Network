@@ -41,7 +41,7 @@ LoginForm = reduxForm({form: 'loginForm'})(LoginForm)
 const Login = (props) => {
     const funSubmit = (formData) => {
         
-        props.setSubmitedData(formData, false)
+        props.setSubmitedData(formData)
     }
     return <div className={s.loginPage}>
         <h1>LOGIN</h1>
@@ -54,8 +54,7 @@ const mapStateToProps = (state) => {
     return {
         login: state.loginPage.data.login,
         password: state.loginPage.data.password,
-        rememberMe: state.loginPage.data.rememberMe,
-        isFetching: state.loginPage.isFetching
+        rememberMe: state.loginPage.data.rememberMe
     }
 }
 
