@@ -54,10 +54,9 @@ const Login = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        login: state.loginPage.data.login,
+        login: state.loginPage.data.email,
         password: state.loginPage.data.password,
-        rememberMe: state.loginPage.data.rememberMe,
-        userId: state.loginPage.userId
+        rememberMe: state.loginPage.data.rememberMe
     }
 }
 
