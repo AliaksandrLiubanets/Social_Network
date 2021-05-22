@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setAuthUserDataThunkCreator, setUserAvatar } from '../../redux/reducer-auth';
+import { logout, setAuthUserDataThunkCreator, setUserAvatar } from '../../redux/reducer-auth';
 import Header from './Header';
 
 class HeaderContainer extends React.Component {
@@ -50,6 +50,10 @@ const mapDispatchToProps = (dispatch) => {
     setUserAvatar: (userId) => {
       dispatch(setUserAvatar(userId))
     },
+    logout: () => {
+      dispatch(logout())
+    }
+
   }
 }
 
