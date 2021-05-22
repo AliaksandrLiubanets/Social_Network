@@ -1,5 +1,5 @@
 
-import { authAPI, usersAPI } from "../api/api";
+import { authAPI, profileAPI, usersAPI } from "../api/api";
 
 const SET_USER_DATA = 'SET_LOGIN_DATA';
 const SET_USER_AVATAR = 'SET_USER_AVATAR';
@@ -37,7 +37,6 @@ export const setUserAvatarAC = (photo) => ({ type: SET_USER_AVATAR, photo });
 export const setAuthUserDataThunkCreator = () => (dispatch) => {
     authAPI.getAuthData()
         .then(response => {
-
             if (response.data.resultCode === 0) {
                 let { id, email, login } = response.data.data;
                 dispatch(setAuthUserDataAC(id, email, login))
@@ -45,14 +44,17 @@ export const setAuthUserDataThunkCreator = () => (dispatch) => {
         })
 }
 
-export const setUserAvatar = (userId) => {
-    return (dispatch) => {
-        usersAPI.getProfileUser(userId)
-            .then(data => {
-                dispatch(setUserAvatarAC(data.photos.small))
-            })
-    }
+export const setUserAvatar = (userId) => (dispatch) => {
+    profileAPI.getProfile(userId)
+        .then(data => {
+            dispatch(setUserAvatarAC(data.photos.small))
+        })
+
 }
+
+// export const login = (email, password, rememberMe) => (dispatch) => {
+
+// }
 
 export default reducerAuth;
 

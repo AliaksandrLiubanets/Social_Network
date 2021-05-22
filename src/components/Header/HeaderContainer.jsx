@@ -18,8 +18,10 @@ class HeaderContainer extends React.Component {
     //     }
     //   })
 
-    // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`, { withCredentials: true }) 
+    // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`, { withCredentials: true })
+
     this.props.setUserAvatar(userId)
+
     // usersAPI.getProfileUser(userId)
     //   .then(data => {        
     //     this.props.setUserAvatar(data.photos.small)

@@ -24,16 +24,6 @@ export const usersAPI = {
         return instance.delete(`follow/${userId}`)
     }, 
 
-    // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`, {withCredentials: true})
-    getProfileUser(userId) {
-        console.warn('Obsolete method. Please use profileAPI object')
-        return profileAPI.getProfile(userId)
-    },
-
-    // axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, { withCredentials: true }) // при кросс-доменном запросе необходимо делать уточнение, что всё равно надо сделать запрос, несмотря на кросс-домменый запрос. Используется {withCredentials: ture}. Предварительно мы уже зарегистрировались на сайте!!!
-    getAuthData() {
-        return instance.get(`auth/me`)
-    }
 }
 
 export const profileAPI = {
@@ -58,7 +48,7 @@ export const authAPI = {
         return instance.get(`auth/me`) 
     },
 
-    login(email, password, rememberMe) {
+    login(email, password, rememberMe = false) {
         return instance.post(`auth/login`, { email, password, rememberMe } )
     },
 
