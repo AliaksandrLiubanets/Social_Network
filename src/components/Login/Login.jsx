@@ -1,11 +1,10 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
-import SubmitedData from './SubmitedData'
 import { connect } from 'react-redux'
-import { setSubmitedData } from './../../redux/reducer-login.js'
 import { alphaNumeric, maxLength30, minLength4, required, minLength } from '../../common/validators/validator'
 import { login } from './../../redux/reducer-auth'
 import s from './Login.module.css'
+import { Redirect } from 'react-router'
 
 // const inputField = ({input, meta: {touched, error}}) => (
 const inputField = (props) => {
@@ -24,8 +23,7 @@ const inputField = (props) => {
 const minLength2 = minLength(2) 
 
 let LoginForm = (props) => {
-    let {pristine, submitting, reset, handleSubmit } = props    
-    debugger;
+    let {pristine, submitting, reset, handleSubmit } = props        
     return <>
         <form onSubmit={handleSubmit}>
             <div><Field component={inputField} name='email' validate={[required, minLength4, maxLength30]} type="email" placeholder='Email' /></div>
@@ -42,27 +40,25 @@ LoginForm = reduxForm({form: 'loginForm'})(LoginForm)
 const Login = (props) => {
     const funSubmit = (formData) => {
         let {email, password, rememberMe} = formData
-        // props.setSubmitedData(email, password, rememberMe)
         props.login(email, password, rememberMe)
-        // props.setUserIdAuth()
-
     }
+    
+    props.isAuth && <Redirect to='/profile'/> 
+
     return <div className={s.loginPage}>
         <h1>LOGIN</h1>
         <LoginForm onSubmit={funSubmit}/>
-        <SubmitedData {...props} />
-    </div>
+    </div>   
 }
 
 const mapStateToProps = (state) => {
     return {
-        login: state.loginPage.data.email,
-        password: state.loginPage.data.password,
-        rememberMe: state.loginPage.data.rememberMe
+        isAuth: state.auth.isAuth
     }
 }
 
-export default connect( mapStateToProps, {setSubmitedData, login})(Login)
+
+export default connect( mapStateToProps, {login})(Login)
 
 // export default Login
 

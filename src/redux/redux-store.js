@@ -15,7 +15,6 @@ let reducers = combineReducers({
     sidebar: reducerSidebar,
     usersPage: reducerUsers,
     auth: reducerAuth,
-    loginPage: reducerLogin,
     form: formReducer   
 })
 

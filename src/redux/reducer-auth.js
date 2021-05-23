@@ -44,10 +44,10 @@ export const setAuthUserDataThunkCreator = () => (dispatch) => {
         })
 }
 
-export const setUserAvatar = (userId) => (dispatch) => {
+export const setUserAvatar = (userId) => (dispatch) => {  
     profileAPI.getProfile(userId)
         .then(data => {
-            dispatch(setUserAvatarAC(data.photos.small))
+            dispatch(setUserAvatarAC(data.photos.small))   // I wait that photo will appear when I download my photo on server
         })
 
 }
