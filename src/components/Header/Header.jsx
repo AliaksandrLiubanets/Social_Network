@@ -3,7 +3,7 @@ import s from './Header.module.css';
 import loginUserAvatar from '../../assets/loginUserAvatar.png';
 import userEmptyAvatar from '../../assets/userEmptyAvatar.png'
 
-const Header = (props) => {  
+const Header = (props) => {
 
   return <header className={s.header}>
     {/* <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6_lULuLhKRsxlcn_z3OW5mU4IV1v18fTkEg&usqp=CAU"></img> */}
@@ -20,14 +20,17 @@ const Header = (props) => {
           <div className={s.authorizedUser}>
             <div className={s.userAvatar}>
               {
-                !props.userAvatar 
-                ? <img src={userEmptyAvatar} />
-                : <img src={props.userAvatar} />
-              }              
-              </div>
+                !props.userAvatar
+                  ? <img src={userEmptyAvatar} />
+                  : <img src={props.userAvatar} />
+              }
+            </div>
             <div className={s.userLogin}>{props.login}</div>
           </div>
         </NavLink>
+    }
+    {
+      props.isAuth && <div><button onClick={props.logout}>logout</button></div>
     }
   </header>
 }

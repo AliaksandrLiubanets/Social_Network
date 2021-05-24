@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setAuthUserDataThunkCreator, setUserAvatar } from '../../redux/reducer-auth';
+import { logout, setAuthUserDataThunkCreator, setUserAvatar } from '../../redux/reducer-auth';
 import Header from './Header';
 
 class HeaderContainer extends React.Component {
@@ -18,8 +18,10 @@ class HeaderContainer extends React.Component {
     //     }
     //   })
 
-    // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`, { withCredentials: true }) 
+    // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`, { withCredentials: true })
+
     this.props.setUserAvatar(userId)
+
     // usersAPI.getProfileUser(userId)
     //   .then(data => {        
     //     this.props.setUserAvatar(data.photos.small)
@@ -48,6 +50,10 @@ const mapDispatchToProps = (dispatch) => {
     setUserAvatar: (userId) => {
       dispatch(setUserAvatar(userId))
     },
+    logout: () => {
+      dispatch(logout())
+    }
+
   }
 }
 

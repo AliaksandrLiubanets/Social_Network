@@ -1,5 +1,5 @@
 
-import { usersAPI } from "../api/api";
+import { authAPI, profileAPI } from "../api/api";
 
 const SET_USER_DATA = 'SET_LOGIN_DATA';
 const SET_USER_AVATAR = 'SET_USER_AVATAR';
@@ -17,8 +17,8 @@ const reducerAuth = (state = initialState, action) => {
         case SET_USER_DATA:
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
+                ...action.data
+                
             }
         case SET_USER_AVATAR:
             return {
@@ -31,28 +31,46 @@ const reducerAuth = (state = initialState, action) => {
     }
 };
 
-export const setAuthUserDataAC = (userId, email, login) => ({ type: SET_USER_DATA, data: { userId, email, login } });
+export const setAuthUserDataAC = (userId, email, login, isAuth) => ({ type: SET_USER_DATA, data: { userId, email, login, isAuth } });
 export const setUserAvatarAC = (photo) => ({ type: SET_USER_AVATAR, photo });
 
 export const setAuthUserDataThunkCreator = () => (dispatch) => {
-    usersAPI.getAuthData()
+    authAPI.getAuthData()
         .then(response => {
-
             if (response.data.resultCode === 0) {
                 let { id, email, login } = response.data.data;
-                dispatch(setAuthUserDataAC(id, email, login))
+                dispatch(setAuthUserDataAC(id, email, login, true))
             }
         })
 }
 
-export const setUserAvatar = (userId) => {
-    return (dispatch) => {
-        usersAPI.getProfileUser(userId)
-            .then(data => {
-                dispatch(setUserAvatarAC(data.photos.small))
-            })
-    }
+export const setUserAvatar = (userId) => (dispatch) => {  
+    profileAPI.getProfile(userId)
+        .then(data => {
+            dispatch(setUserAvatarAC(data.photos.small))   // I wait that photo will appear when I download my photo on server
+        })
+
 }
+
+export const login = (email, password, rememberMe) => (dispatch) => {
+    authAPI.login(email, password, rememberMe)            // make post request
+        .then(response => {
+            if(response.data.resultCode === 0) {
+                dispatch(setAuthUserDataThunkCreator())   // make get request with setAuthUserDataAC(id, email, login)
+            }
+        })
+}
+
+export const logout = () => (dispatch) => {
+    authAPI.logout()
+    .then(response => {
+        if(response.data.resultCode === 0) {
+            dispatch(setAuthUserDataAC(null, null, null, false))
+        }
+    })
+} 
+
+
 
 export default reducerAuth;
 

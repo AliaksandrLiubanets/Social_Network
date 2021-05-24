@@ -1,34 +1,23 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Posts/Post';
+import { reduxForm } from 'redux-form'
+import MessageSend from '../../../common/formControls/MessageSend';
 
 const MyPosts = (props) => {
   
   let postsElements =
     props.state.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount} id={p.id} avatar={p.avatar} />);
-  
-  let newPostElement = React.createRef();
-
-  let onAddPost = () => {    
-    props.addPost();             
-  }
-
-  let onPostChange = () => {      
-    let text = newPostElement.current.value;
-    props.updateNewPostText(text);    
+ 
+  let onAddPost = (formData) => {    
+    props.addPost(formData.message);             
   }
   
-  return (
-    
+  return (    
     <div className={s.postsBlock}>
       <h3>My posts</h3>
       <div>
-        <div>
-          <textarea  onChange={onPostChange} ref={newPostElement} value={props.newPostText} autoFocus/>
-        </div>
-        <div>
-          <button onClick={onAddPost}>Add post</button>
-        </div>
+        <ReduxMyPostForm onSubmit={onAddPost}/>
       </div>
       <div className={s.posts}>
         {postsElements}
@@ -36,5 +25,20 @@ const MyPosts = (props) => {
     </div>
   )
 }
+
+// const MyPostForm = (props) => {
+//   return (
+//     <form onSubmit={props.handleSubmit}>
+//       <div>
+//         <Field component='textarea' name='onAddPost' />
+//       </div>
+//       <button>Send</button>
+//     </form>
+//   )
+// }
+
+// const ReduxMyPostForm = reduxForm({form: 'dialogsPost'})(MyPostForm)
+
+const ReduxMyPostForm = reduxForm({ form: 'dialogsMessage'})(MessageSend)
 
 export default MyPosts;
