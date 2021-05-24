@@ -48,7 +48,11 @@ const Login = (props) => {
     return <div className={s.loginPage}>
         <h1>LOGIN</h1>
         <LoginForm onSubmit={funSubmit}/>
-    </div>   
+
+        {/* <SubmitedData {...props} /> */}
+
+    </div>
+
 }
 
 const mapStateToProps = (state) => {
