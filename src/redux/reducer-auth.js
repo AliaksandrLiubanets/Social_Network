@@ -3,13 +3,16 @@ import { authAPI, profileAPI } from "../api/api";
 
 const SET_USER_DATA = 'SET_LOGIN_DATA';
 const SET_USER_AVATAR = 'SET_USER_AVATAR';
+const SET_ERROR_TEXT = 'SET_ERROR_TEXT';
 
 let initialState = {
     userId: null,
     email: null,
     login: null,
     isAuth: false,
-    userAvatar: null
+    userAvatar: null,
+    isError: false,
+    errorText: null
 }
 
 const reducerAuth = (state = initialState, action) => {
@@ -25,6 +28,12 @@ const reducerAuth = (state = initialState, action) => {
                 ...state,
                 userAvatar: action.photo
             }
+        case SET_ERROR_TEXT:
+            return {
+                ...state,
+                errorText: action.errorText,
+                isError: action.isError
+            }
 
         default:
             return state;
@@ -33,6 +42,7 @@ const reducerAuth = (state = initialState, action) => {
 
 export const setAuthUserDataAC = (userId, email, login, isAuth) => ({ type: SET_USER_DATA, data: { userId, email, login, isAuth } });
 export const setUserAvatarAC = (photo) => ({ type: SET_USER_AVATAR, photo });
+export const setErrorTextAC = (errorText, isError) => ({ type: SET_ERROR_TEXT, errorText, isError });
 
 export const setAuthUserDataThunkCreator = () => (dispatch) => {
     authAPI.getAuthData()
@@ -57,6 +67,9 @@ export const login = (email, password, rememberMe) => (dispatch) => {
         .then(response => {
             if(response.data.resultCode === 0) {
                 dispatch(setAuthUserDataThunkCreator())   // make get request with setAuthUserDataAC(id, email, login)
+            } else {
+                let errorText = response.data.messages[0]
+                dispatch(setErrorTextAC(errorText, true))
             }
         })
 }

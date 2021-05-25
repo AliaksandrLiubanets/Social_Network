@@ -2,7 +2,7 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { alphaNumeric, maxLength30, minLength4, required, minLength } from '../../common/validators/validator'
-import { login } from './../../redux/reducer-auth'
+import { login, logout } from './../../redux/reducer-auth'
 import s from './Login.module.css'
 import { Redirect } from 'react-router'
 
@@ -48,6 +48,7 @@ const Login = (props) => {
     return <div className={s.loginPage}>
         <h1>LOGIN</h1>
         <LoginForm onSubmit={funSubmit}/>
+        {props.isError ? <div>{props.errorText}</div> : null}
         {/* <SubmitedData {...props} /> */}
     </div>
 
@@ -55,12 +56,14 @@ const Login = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        isError: state.auth.isError,
+        errorText: state.auth.errorText
     }
 }
 
 
-export default connect( mapStateToProps, {login})(Login)
+export default connect( mapStateToProps, {login, logout})(Login)
 
 // export default Login
 
