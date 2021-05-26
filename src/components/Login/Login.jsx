@@ -63,7 +63,9 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect( mapStateToProps, {login, logout})(Login)
+export default connect( mapStateToProps, {login})(Login)
 
-// export default Login
+// const wrapperLoginFormWithProps = connect(mapStateToProps)(LoginForm)
+
+
 
