@@ -10,3 +10,6 @@
     color: rgb(233, 21, 21);
 }
 
+.errorBorder {
+    border: 2px solid red;
+}
