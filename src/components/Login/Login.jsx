@@ -12,7 +12,7 @@ const inputField = (props) => {
     return (
     
         <div>
-            <input {...input} type={type} placeholder={placeholder} />
+            <input className={touched &&  (error || (!props.isAuth && props.isError)) ? s.errorBorder : undefined } {...input} type={type} placeholder={placeholder} />
             {
                 touched &&  error && <span className={s.error}>{ error }</span>
             }
@@ -26,8 +26,8 @@ let LoginForm = (props) => {
     let {pristine, submitting, reset, handleSubmit } = props        
     return <>
         <form onSubmit={handleSubmit}>
-            <div><Field component={inputField} name='email' validate={[required, minLength4, maxLength30]} type="email" placeholder='Email' /></div>
-            <div><Field component={inputField} name='password' validate={[required, alphaNumeric, minLength2]} type="password" placeholder='Password' /></div>
+            <div><Field component={inputField} name='email' validate={[required, minLength4, maxLength30]} type="email" placeholder='Email' isError={props.isError} isAuth={props.isAuth}/></div>
+            <div><Field component={inputField} name='password' validate={[required, alphaNumeric, minLength2]} type="password" placeholder='Password' isError={props.isError} isAuth={props.isAuth}/></div>
             <div><Field component='input' name='rememberMe' type="checkbox" />remember me</div>
             <button className={s.button} type='submit' disabled={ pristine || submitting} >Send</button>
             <button className={s.buttonClear} type='submit' disabled={ pristine || submitting } onClick={reset}>Clear</button>
@@ -48,7 +48,7 @@ const Login = (props) => {
 
     return <div className={s.loginPage}>
         <h1>LOGIN</h1>
-        <LoginForm onSubmit={funSubmit}/>
+        <LoginForm onSubmit={funSubmit} isError={props.isError} isAuth={props.isAuth}/>
         {props.isError ? <div className={s.errorText}>{props.errorText}</div> : null}
         {/* <SubmitedData {...props} /> */}
     </div>
