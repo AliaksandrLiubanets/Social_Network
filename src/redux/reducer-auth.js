@@ -1,4 +1,5 @@
 
+import { stopSubmit } from "redux-form";
 import { authAPI, profileAPI } from "../api/api";
 
 const SET_USER_DATA = 'SET_LOGIN_DATA';
@@ -11,8 +12,8 @@ let initialState = {
     login: null,
     isAuth: false,
     userAvatar: null,
-    isError: false,
-    errorText: null
+    // isError: false,
+    // errorText: null
 }
 
 const reducerAuth = (state = initialState, action) => {
@@ -28,12 +29,12 @@ const reducerAuth = (state = initialState, action) => {
                 ...state,
                 userAvatar: action.photo
             }
-        case SET_ERROR_TEXT:
-            return {
-                ...state,
-                errorText: action.errorText,
-                isError: action.isError
-            }
+        // case SET_ERROR_TEXT:
+        //     return {
+        //         ...state,
+        //         errorText: action.errorText,
+        //         isError: action.isError
+        //     }
 
         default:
             return state;
@@ -42,7 +43,7 @@ const reducerAuth = (state = initialState, action) => {
 
 export const setAuthUserDataAC = (userId, email, login, isAuth) => ({ type: SET_USER_DATA, data: { userId, email, login, isAuth } });
 export const setUserAvatarAC = (photo) => ({ type: SET_USER_AVATAR, photo });
-export const setErrorTextAC = (errorText, isError) => ({ type: SET_ERROR_TEXT, errorText, isError });
+// export const setErrorTextAC = (errorText, isError) => ({ type: SET_ERROR_TEXT, errorText, isError });
 
 export const setAuthUserDataThunkCreator = () => (dispatch) => {
     authAPI.getAuthData()
@@ -63,6 +64,7 @@ export const setUserAvatar = (userId) => (dispatch) => {
 }
 
 export const login = (email, password, rememberMe) => (dispatch) => {
+   
     authAPI.login(email, password, rememberMe)            // make post request
         .then(response => {
             if(response.data.resultCode === 0) {
@@ -70,7 +72,8 @@ export const login = (email, password, rememberMe) => (dispatch) => {
             } else {
                 let errorText 
                 if (response.data.messages.length > 0) {errorText = response.data.messages[0]} 
-                dispatch(setErrorTextAC(errorText, true))
+                // dispatch(setErrorTextAC(errorText, true))
+                dispatch(stopSubmit('loginForm', {_error: errorText} ))
             }
         })
 }
@@ -83,8 +86,6 @@ export const logout = () => (dispatch) => {
         }
     })
 } 
-
-
 
 export default reducerAuth;
 
