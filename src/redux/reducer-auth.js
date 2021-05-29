@@ -68,7 +68,8 @@ export const login = (email, password, rememberMe) => (dispatch) => {
             if(response.data.resultCode === 0) {
                 dispatch(setAuthUserDataThunkCreator())   // make get request with setAuthUserDataAC(id, email, login)
             } else {
-                let errorText = response.data.messages[0]
+                let errorText 
+                if (response.data.messages.length > 0) {errorText = response.data.messages[0]} 
                 dispatch(setErrorTextAC(errorText, true))
             }
         })

@@ -23,14 +23,16 @@ const inputField = (props) => {
 const minLength2 = minLength(2) 
 
 let LoginForm = (props) => {
+    debugger;
     let {pristine, submitting, reset, handleSubmit } = props        
     return <>
         <form onSubmit={handleSubmit}>
             <div><Field component={inputField} name='email' validate={[required, minLength4, maxLength30]} type="email" placeholder='Email' isError={props.isError} isAuth={props.isAuth}/></div>
             <div><Field component={inputField} name='password' validate={[required, alphaNumeric, minLength2]} type="password" placeholder='Password' isError={props.isError} isAuth={props.isAuth}/></div>
             <div><Field component='input' name='rememberMe' type="checkbox" />remember me</div>
+            {props.isError ? <div className={s.errorText}>{props.errorText}</div> : null}
             <button className={s.button} type='submit' disabled={ pristine || submitting} >Send</button>
-            <button className={s.buttonClear} type='submit' disabled={ pristine || submitting } onClick={reset}>Clear</button>
+            {/* <button className={s.buttonClear} type='submit' disabled={ pristine || submitting } onClick={reset}>Clear</button> */}
         </form>
     </>
 }
@@ -48,8 +50,8 @@ const Login = (props) => {
 
     return <div className={s.loginPage}>
         <h1>LOGIN</h1>
-        <LoginForm onSubmit={funSubmit} isError={props.isError} isAuth={props.isAuth}/>
-        {props.isError ? <div className={s.errorText}>{props.errorText}</div> : null}
+        <LoginForm onSubmit={funSubmit} isError={props.isError} isAuth={props.isAuth} errorText={props.errorText}/>
+        {/* {props.isError ? <div className={s.errorText}>{props.errorText}</div> : null} */}
         {/* <SubmitedData {...props} /> */}
     </div>
 
