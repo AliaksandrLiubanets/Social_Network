@@ -45,9 +45,9 @@ export const setAuthUserDataAC = (userId, email, login, isAuth) => ({ type: SET_
 export const setUserAvatarAC = (photo) => ({ type: SET_USER_AVATAR, photo });
 // export const setErrorTextAC = (errorText, isError) => ({ type: SET_ERROR_TEXT, errorText, isError });
 
-export const setAuthUserDataThunkCreator = () => (dispatch) => {
-    authAPI.getAuthData()
-        .then(response => {
+export const setAuthUserDataThunkCreator = () => (dispatch) => { // dispatch возвращает на то, что мы вернём из этой ф-ции с помощью добавления return
+     return authAPI.getAuthData()        // getAuthData - возвращает promise. Мы на него подписываемся. Если ставим return, то наружу возвращается promise
+        .then(response => {             // then тоже возвращает promise
             if (response.data.resultCode === 0) {
                 let { id, email, login } = response.data.data;
                 dispatch(setAuthUserDataAC(id, email, login, true))

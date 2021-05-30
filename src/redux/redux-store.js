@@ -8,6 +8,7 @@ import reducerUsers from './reducer-users';
 import thunkMiddleWare from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form'
 import reducerLogin from './reducer-login';
+import reducerApp from './reducer-app';
 
 let reducers = combineReducers({
     profilePage: reducerProfile,
@@ -15,7 +16,8 @@ let reducers = combineReducers({
     sidebar: reducerSidebar,
     usersPage: reducerUsers,
     auth: reducerAuth,
-    form: formReducer   
+    form: formReducer,
+    app: reducerApp   
 })
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleWare));

@@ -22,7 +22,6 @@ const inputField = (props) => {
 const minLength2 = minLength(2) 
 
 let LoginForm = (props) => {
-    debugger;
     let {pristine, submitting, reset, handleSubmit } = props        
     return <>
         <form onSubmit={handleSubmit}>

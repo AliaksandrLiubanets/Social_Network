@@ -8,7 +8,9 @@ class HeaderContainer extends React.Component {
     let userId = this.props.userId;
 
     // axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, { withCredentials: true }) // при кросс-доменном запросе необходимо делать уточнение, что всё равно надо сделать запрос, несмотря на кросс-домменый запрос. Используется {withCredentials: ture}. Предварительно мы уже зарегистрировались на сайте!!!
-    this.props.setAuth()
+    
+    // this.props.setAuth()
+
     // usersAPI.getAuthData()
     //   .then(response => {
         
@@ -44,9 +46,9 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setAuth: () => {
-      dispatch(setAuthUserDataThunkCreator())
-    },
+    // setAuth: () => {
+    //   dispatch(setAuthUserDataThunkCreator())
+    // },
     setUserAvatar: (userId) => {
       dispatch(setUserAvatar(userId))
     },
