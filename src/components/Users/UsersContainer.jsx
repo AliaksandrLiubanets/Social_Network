@@ -8,7 +8,12 @@ import Users from '../Users/Users';
 import Preloader from '../../common/Preloader';
 
 import { compose } from 'redux';
-import { getUsers, getPageSize, getTotalUsersCount, getCurrentPage, getIsFetching, getFollowingInProgress } from '../../redux/selectors/user-selectors';
+import { getUsers, 
+         getPageSize, 
+         getTotalUsersCount, 
+         getCurrentPage, 
+         getIsFetching, 
+         getFollowingInProgress } from '../../redux/selectors/user-selectors';
 
 class UsersContainer extends React.Component {        
        
