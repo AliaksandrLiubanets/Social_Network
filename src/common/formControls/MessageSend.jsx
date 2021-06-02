@@ -1,7 +1,6 @@
 import React from 'react'
 import { Field } from 'redux-form'
 import { maxLength, minLength, required } from '../validators/validator'
-// import { maxLength, required } from './required'
 import { Textarea } from './Textarea'
 
 const maxLength100 = maxLength(100)

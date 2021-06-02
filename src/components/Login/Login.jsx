@@ -49,8 +49,6 @@ const Login = (props) => {
     return <div className={s.loginPage}>
         <h1>LOGIN</h1>
         <LoginForm onSubmit={funSubmit} />
-        {/* {props.isError ? <div className={s.errorText}>{props.errorText}</div> : null} */}
-        {/* <SubmitedData {...props} /> */}
     </div>
 
 }
