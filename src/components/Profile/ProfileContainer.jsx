@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { compose } from 'redux'
+import Preloader from '../../common/Preloader'
 import { HOCRedirectToLogin } from '../../HOC/HOCRedirectToLogin'
 import { getStatusThunkCreator, setUserProfileThunkCreator, updateStatusThunkCreator } from '../../redux/reducer-profile'
 import Profile from './Profile'
@@ -22,7 +23,12 @@ class ProfileContainer extends React.Component {
         this.props.getStatus(userId)        
     }
 
-    render = () => {   
+    render = () => {  
+        
+        if (!this.props.isInitialized) {
+            return <Preloader/>
+        }
+
         return <Profile {...this.props} />      
     }    
 }
@@ -31,7 +37,8 @@ const mapStateToProps = (state) => {
     return {
         profile: state.profilePage.profile,
         status: state.profilePage.status,
-        userId: state.auth.userId  
+        userId: state.auth.userId,
+        isInitialized: state.profilePage.isInitialized  
     }
 }
 

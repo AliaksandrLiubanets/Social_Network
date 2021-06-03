@@ -22,7 +22,6 @@ const setInitializeSucsess = () => ({type: INITIALIZING_SUCSESS})
 
 export const initialize = () => (dispatch) => {
     let promise = dispatch(setAuthUserDataThunkCreator())
-    debugger;
     promise.then(() => {
         dispatch(setInitializeSucsess())
     })

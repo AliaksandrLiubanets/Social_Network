@@ -1,18 +1,20 @@
-import { profileAPI} from "../api/api";
+import { profileAPI } from "../api/api";
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 const SET_POST_MESSAGE = 'SET_POST_MESSAGE';
+const SET_INITIALIZE_PROFILE = 'SET_INITIALIZE_PROFILE';
 
 let initialState = {
     postsData: [
 
         { id: 1, message: 'Hi, How are you?', likesCount: 15, avatar: 'https://img0.liveinternet.ru/images/attach/c/3/84/342/84342334_Girls29563.jpg' }
-    ],              
-    
+    ],
+
     profile: null,
-    status: ''
+    status: '',
+    isInitialized: false
 }
 
 const reducerProfile = (state = initialState, action) => {
@@ -48,6 +50,12 @@ const reducerProfile = (state = initialState, action) => {
                 postMessage: action.message
             }
 
+        case SET_INITIALIZE_PROFILE:
+            return {
+                ...state,
+                isInitialized: true
+            }
+
         default:
             return state;
     }
@@ -57,6 +65,7 @@ export const addPostActionCreator = (postText) => ({ type: ADD_POST, newPostText
 export const setUserProfileAC = (profile) => ({ type: SET_USER_PROFILE, profile });
 export const setUserProfileStatusAC = (status) => ({ type: SET_STATUS, status });
 export const setPostMessageAC = (message) => ({ type: SET_POST_MESSAGE, message })
+export const setInitializeProfile = () => ({ type: SET_INITIALIZE_PROFILE })
 
 export const setUserProfileThunkCreator = (userId) => (dispatch) => {
     profileAPI.getProfile(userId)
@@ -78,6 +87,15 @@ export const updateStatusThunkCreator = (status) => (dispatch) => {
             if (response.data.resultCode === 0) {
                 dispatch(setUserProfileStatusAC(status))
             }
+        })
+}
+
+export const initializeProfile = () => (dispatch) => {
+    let promiseUpdateStatus = dispatch(updateStatusThunkCreator())
+    let promiseUserProfile = dispatch(setUserProfileThunkCreator())
+    Promise.all([promiseUpdateStatus, promiseUserProfile])
+        .then(() => {
+            dispatch(setInitializeProfile())
         })
 }
 
