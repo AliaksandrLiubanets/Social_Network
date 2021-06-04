@@ -4,7 +4,7 @@ import { withRouter } from 'react-router'
 import { compose } from 'redux'
 import Preloader from '../../common/Preloader'
 import { HOCRedirectToLogin } from '../../HOC/HOCRedirectToLogin'
-import { getStatusThunkCreator, setUserProfileThunkCreator, updateStatusThunkCreator } from '../../redux/reducer-profile'
+import { getStatusThunkCreator, initializeProfile, setUserProfileThunkCreator, updateStatusThunkCreator } from '../../redux/reducer-profile'
 import Profile from './Profile'
 
 class ProfileContainer extends React.Component {
@@ -19,8 +19,9 @@ class ProfileContainer extends React.Component {
             // }
         }
         
-        this.props.setUserProfile(userId)   
-        this.props.getStatus(userId)        
+        // this.props.setUserProfile(userId)   
+        // this.props.getStatus(userId)  
+        this.props.initializeProfile(userId)      
     }
 
     render = () => {  
@@ -44,14 +45,17 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setUserProfile: (userId) => {
-            dispatch(setUserProfileThunkCreator(userId))
-        },
-        getStatus: (userId) => {
-            dispatch(getStatusThunkCreator(userId))
-        },
+        // setUserProfile: (userId) => {
+        //     dispatch(setUserProfileThunkCreator(userId))
+        // },
+        // getStatus: (userId) => {
+        //     dispatch(getStatusThunkCreator(userId))
+        // },
         updateStatus: (status) => {
             dispatch(updateStatusThunkCreator(status))
+        },
+        initializeProfile: (userId) => {
+            dispatch(initializeProfile(userId))
         }
     }
 }

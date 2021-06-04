@@ -90,10 +90,10 @@ export const updateStatusThunkCreator = (status) => (dispatch) => {
         })
 }
 
-export const initializeProfile = () => (dispatch) => {
-    let promiseUpdateStatus = dispatch(updateStatusThunkCreator())
-    let promiseUserProfile = dispatch(setUserProfileThunkCreator())
-    Promise.all([promiseUpdateStatus, promiseUserProfile])
+export const initializeProfile = (userId) => (dispatch) => {
+    let promiseSetStatus = dispatch(getStatusThunkCreator(userId))
+    let promiseUserProfile = dispatch(setUserProfileThunkCreator(userId))
+    Promise.all([promiseSetStatus, promiseUserProfile])
         .then(() => {
             dispatch(setInitializeProfile())
         })
