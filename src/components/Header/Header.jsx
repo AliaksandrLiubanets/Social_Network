@@ -30,7 +30,7 @@ const Header = (props) => {
         </NavLink>
     }
     {
-      props.isAuth && <div><button onClick={props.logout}>logout</button></div>
+      props.isAuth && <div><button className={s.logoutButton} onClick={props.logout}>logout</button></div>
     }
   </header>
 }

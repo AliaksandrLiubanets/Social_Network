@@ -34,3 +34,9 @@
 .userAvatar {
   float: left;
 }
+
+.logoutButton {
+  position: absolute;
+  bottom: 30%;
+  left: 100px;
+}
