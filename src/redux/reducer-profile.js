@@ -67,14 +67,14 @@ export const setUserProfileStatusAC = (status) => ({ type: SET_STATUS, status })
 export const setPostMessageAC = (message) => ({ type: SET_POST_MESSAGE, message })
 export const setInitializeProfile = () => ({ type: SET_INITIALIZE_PROFILE })
 
-export const setUserProfileThunkCreator = (userId) => (dispatch) => {
+const setUserProfileThunkCreator = (userId) => (dispatch) => {
     profileAPI.getProfile(userId)
         .then(data => {
             dispatch(setUserProfileAC(data))
         })
 }
 
-export const getStatusThunkCreator = (userId) => (dispatch) => {
+const getStatusThunkCreator = (userId) => (dispatch) => {
     profileAPI.getStatus(userId)
         .then(response => {
             dispatch(setUserProfileStatusAC(response.data))

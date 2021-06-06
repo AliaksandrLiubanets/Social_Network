@@ -38,7 +38,7 @@ const reducerDialogs = (state = initialState, action) => {
          
         case SEND_MESSAGE:      
             let newMessage = {
-            id: 7,
+            // id: 7,
             name: 'Valera',
             avatar: 'https://i.pinimg.com/originals/f4/05/4c/f4054c3db50a08c2f266e82b44b5ca90.jpg',
             message: action.message
