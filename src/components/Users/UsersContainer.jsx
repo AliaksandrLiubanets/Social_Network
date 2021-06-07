@@ -14,7 +14,10 @@ import { getUsers,
          getCurrentPage, 
          getIsFetching, 
          getFollowingInProgress, 
-         tenthUsers} from '../../redux/selectors/user-selectors';
+         tenthUsers,
+         everySecondUserWithPhoto,
+         filteredWithPhoto,
+         usersWithNameDmitriy} from '../../redux/selectors/user-selectors';
 
 class UsersContainer extends React.Component {        
        
@@ -53,12 +56,14 @@ class UsersContainer extends React.Component {
 const mapStateToProps = (state) => {
     return {
         // users: getUsers(state),
-        users: tenthUsers(state),
+        // users: everySecondUserWithPhoto(state),
+        // users: filteredWithPhoto(state),
+        users: usersWithNameDmitriy(state),
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
         isFetching: getIsFetching(state),        
-        followingInProgress: getFollowingInProgress(state),        
+        followingInProgress: getFollowingInProgress(state),
     }
 }
 
