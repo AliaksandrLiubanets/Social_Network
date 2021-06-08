@@ -24,6 +24,11 @@ export const usersWithNameDmitriy = createSelector(
     users => users.filter(user => user.name.includes('Dmitriy'))
 )
 
+export const usersWithLetterD = createSelector(
+    getUsers,
+    users => users.filter(user => user.name.includes('D'))
+)
+
 export const tenthUsers = createSelector(
     filteredEveryTenthUsers,
     users => users.filter(user => true) 
