@@ -18,7 +18,8 @@ import { getUsers,
          everySecondUserWithPhoto,
          filteredWithPhoto,
          usersWithNameDmitriy,
-         usersWithLetterD} from '../../redux/selectors/user-selectors';
+         usersWithLetterD,
+         usersWithTheFirstLetterDd} from '../../redux/selectors/user-selectors';
 
 class UsersContainer extends React.Component {        
        
@@ -60,7 +61,8 @@ const mapStateToProps = (state) => {
         // users: everySecondUserWithPhoto(state),
         // users: filteredWithPhoto(state),
         // users: usersWithNameDmitriy(state),
-        users: usersWithLetterD(state),
+        // users: usersWithLetterD(state),
+        users: usersWithTheFirstLetterDd(state),
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),

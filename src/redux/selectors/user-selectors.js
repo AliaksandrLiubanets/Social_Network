@@ -25,8 +25,17 @@ export const usersWithNameDmitriy = createSelector(
 )
 
 export const usersWithLetterD = createSelector(
-    getUsers,
+    getUsers,    
     users => users.filter(user => user.name.includes('D'))
+)
+
+export const usersWithTheFirstLetterDd = createSelector(
+    getUsers,
+    users => users.filter(user => {
+        if (user.name[0] === 'D' || user.name[0] === 'd') {
+            return user
+        }
+    })
 )
 
 export const tenthUsers = createSelector(
