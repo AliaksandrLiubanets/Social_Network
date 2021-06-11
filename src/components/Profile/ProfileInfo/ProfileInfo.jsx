@@ -5,6 +5,7 @@ import JobDescription from './JobDescription/JobDescription';
 import Photo from './Photo/Photo';
 import s from './ProfileInfo.module.css'
 import ProfileStatus from './ProfileStatus';
+import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 
 const ProfileInfo = (props) => {
     
@@ -18,7 +19,7 @@ const ProfileInfo = (props) => {
                 <Photo photo={props.profile.photos.large} />
                 <FullName fullName={props.profile.fullName} />                
             </div>
-            <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+            <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
             <Job job={props.profile.lookingForAJob} />
             <JobDescription jobDescription={props.profile.lookingForAJobDescription} /> 
             <div>UserId: {props.profile.userId}</div>           
