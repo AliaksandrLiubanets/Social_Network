@@ -1,41 +1,39 @@
 import React, { useState } from 'react'
 
 const ProfileStatusWithHooks = (props) => {
+
+    let [editMode, setEditMode] = useState(false)
+    let [status, setStatus] = useState(props.status)
     
-        // let stateWithSetState = useState(false)
-        // let editMode = stateWithSetState[0]
-        // let setEditMode = stateWithSetState[1]
+    const activateEditMode = () => {
+        setEditMode(true)
+    }
 
-        let [editMode, setEditMode] = useState(false)
-        let [status, setStatus] = useState(props.status)
+    const deactivateEditMode = () => {
+        setEditMode(false)
+        props.updateStatus(status)
+    }
 
-        const activateEditMode = () => {
-            setEditMode(true)
-        }
+    const changeTextInput = (event) => {
+        setStatus(event.currentTarget.value)
+    }
 
-        const deactivateEditMode = () => {
-            setEditMode(false)
-            props.updateStatus(status)
-        }
+    const handleFocus = (event) => {
+        event.target.select()
+    }
 
-        const changeTextInput = (e) => {
-            let body = e.currentTarget.value   // e.target.value
-            setStatus(body)
-        }
-    
-        return <>
-            {   !editMode &&
-                     <div>
-                        <span  onDoubleClick={activateEditMode}>{status || 'Set your status'} </span>
-                    </div>
-            }   
-            {   editMode &&
-                    <div>
-                        <input  onBlur={deactivateEditMode} onChange={changeTextInput} autoFocus={true}
-                         value={status} />
-                    </div>
-            }
-        </>
-}  
+    return <>
+        {
+            !editMode
+                ? <div>
+                    <span onDoubleClick={activateEditMode}>{status}</span>
+                </div>
+                : <div>
+                    <input onBlur={deactivateEditMode} onChange={changeTextInput} 
+                    value={status} autoFocus={true} onFocus={handleFocus}></input>
+                </div>
+        }    
+    </>
+}
 
 export default ProfileStatusWithHooks
