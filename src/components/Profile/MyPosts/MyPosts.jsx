@@ -4,38 +4,27 @@ import Post from './Posts/Post';
 import { reduxForm } from 'redux-form'
 import MessageSend from '../../../common/formControls/MessageSend';
 
-class MyPosts extends PureComponent {
+const MyPosts = React.memo(props => {
 
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   return nextProps !== this.props || nextState !== this.state 
-  // }
-  
-  onAddPost = (formData) => {    
-    this.props.addPost(formData.message);             
+  let postsElements =
+    props.state.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount} id={p.id} avatar={p.avatar} />);
+
+  const onAddPost = (formData) => {
+    props.addPost(formData.message);
   }
 
-  render () {
-
-    console.log('Render MyPosts')
-
-    let postsElements =
-    this.props.state.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount} id={p.id} avatar={p.avatar} />);
-   
-  return (    
+  return (
     <div className={s.postsBlock}>
       <h3>My posts</h3>
       <div>
-        <ReduxMyPostForm onSubmit={this.onAddPost}/>
+        <ReduxMyPostForm onSubmit={onAddPost} />
       </div>
       <div className={s.posts}>
         {postsElements}
       </div>
     </div>
   )
-  
-  }
-  
-}
+})
 
 // const MyPostForm = (props) => {
 //   return (
@@ -50,6 +39,6 @@ class MyPosts extends PureComponent {
 
 // const ReduxMyPostForm = reduxForm({form: 'dialogsPost'})(MyPostForm)
 
-const ReduxMyPostForm = reduxForm({ form: 'dialogsMessage'})(MessageSend)
+const ReduxMyPostForm = reduxForm({ form: 'dialogsMessage' })(MessageSend)
 
 export default MyPosts;
