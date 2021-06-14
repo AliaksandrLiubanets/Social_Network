@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, PureComponent } from 'react';
 import s from './MyPosts.module.css';
 import Post from './Posts/Post';
 import { reduxForm } from 'redux-form'
 import MessageSend from '../../../common/formControls/MessageSend';
 
-class MyPosts extends Component {
+class MyPosts extends PureComponent {
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return nextProps !== this.props || nextState !== this.state 
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return nextProps !== this.props || nextState !== this.state 
+  // }
   
   onAddPost = (formData) => {    
     this.props.addPost(formData.message);             
