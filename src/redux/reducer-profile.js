@@ -9,7 +9,9 @@ const SET_INITIALIZE_PROFILE = 'SET_INITIALIZE_PROFILE';
 let initialState = {
     postsData: [
 
-        { id: 1, message: 'Hi, How are you?', likesCount: 15, avatar: 'https://img0.liveinternet.ru/images/attach/c/3/84/342/84342334_Girls29563.jpg' }
+        { id: 1, message: 'Hi, How are you?', likesCount: 15, avatar: 'https://img0.liveinternet.ru/images/attach/c/3/84/342/84342334_Girls29563.jpg' },
+        { id: 2, message: 'Hi, ?', likesCount: 5, avatar: 'https://img0.liveinternet.ru/images/attach/c/3/84/342/84342334_Girls29563.jpg' }, 
+        { id: 3, message: 'Hi you?', likesCount: 1, avatar: 'https://img0.liveinternet.ru/images/attach/c/3/84/342/84342334_Girls29563.jpg' }
     ],
 
     profile: null,
