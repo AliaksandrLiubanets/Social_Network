@@ -1,19 +1,15 @@
-
 import { stopSubmit } from "redux-form";
 import { authAPI, profileAPI } from "../api/api";
 
-const SET_USER_DATA = 'SET_LOGIN_DATA';
-const SET_USER_AVATAR = 'SET_USER_AVATAR';
-const SET_ERROR_TEXT = 'SET_ERROR_TEXT';
+const SET_USER_DATA = 'auth/SET_LOGIN_DATA';
+const SET_USER_AVATAR = 'auth/SET_USER_AVATAR';
 
 let initialState = {
     userId: null,
     email: null,
     login: null,
     isAuth: false,
-    userAvatar: null,
-    // isError: false,
-    // errorText: null
+    userAvatar: null
 }
 
 const reducerAuth = (state = initialState, action) => {
@@ -28,14 +24,7 @@ const reducerAuth = (state = initialState, action) => {
             return {
                 ...state,
                 userAvatar: action.photo
-            }
-        // case SET_ERROR_TEXT:
-        //     return {
-        //         ...state,
-        //         errorText: action.errorText,
-        //         isError: action.isError
-        //     }
-
+            }      
         default:
             return state;
     }
@@ -43,11 +32,10 @@ const reducerAuth = (state = initialState, action) => {
 
 export const setAuthUserDataAC = (userId, email, login, isAuth) => ({ type: SET_USER_DATA, data: { userId, email, login, isAuth } });
 export const setUserAvatarAC = (photo) => ({ type: SET_USER_AVATAR, photo });
-// export const setErrorTextAC = (errorText, isError) => ({ type: SET_ERROR_TEXT, errorText, isError });
 
-export const setAuthUserDataThunkCreator = () => (dispatch) => { // dispatch возвращает на то, что мы вернём из этой ф-ции с помощью добавления return
-     return authAPI.getAuthData()        // getAuthData - возвращает promise. Мы на него подписываемся. Если ставим return, то наружу возвращается promise
-        .then(response => {             // then тоже возвращает promise
+export const setAuthUserDataThunkCreator = () => (dispatch) => { 
+     return authAPI.getAuthData()       
+        .then(response => {             
             if (response.data.resultCode === 0) {
                 let { id, email, login } = response.data.data;
                 dispatch(setAuthUserDataAC(id, email, login, true))
@@ -60,7 +48,6 @@ export const setUserAvatar = (userId) => (dispatch) => {
         .then(data => {
             dispatch(setUserAvatarAC(data.photos.small))   // I wait that photo will appear when I download my photo on server
         })
-
 }
 
 export const login = (email, password, rememberMe) => (dispatch) => {
@@ -68,11 +55,10 @@ export const login = (email, password, rememberMe) => (dispatch) => {
     authAPI.login(email, password, rememberMe)            // make post request
         .then(response => {
             if(response.data.resultCode === 0) {
-                dispatch(setAuthUserDataThunkCreator())   // make get request with setAuthUserDataAC(id, email, login)
+                dispatch(setAuthUserDataThunkCreator())   
             } else {
                 let errorText 
                 if (response.data.messages.length > 0) {errorText = response.data.messages[0]} 
-                // dispatch(setErrorTextAC(errorText, true))
                 dispatch(stopSubmit('loginForm', {_error: errorText} ))
             }
         })
