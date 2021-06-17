@@ -7,7 +7,7 @@ let initialState = {
 }
 
 const reducerApp = (state = initialState, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case INITIALIZING_SUCSESS:
             return {
                 ...state,
@@ -18,18 +18,18 @@ const reducerApp = (state = initialState, action) => {
     }
 }
 
-const setInitializeSucsess = () => ({type: INITIALIZING_SUCSESS})
+const setInitializeSucsess = () => ({ type: INITIALIZING_SUCSESS })
 
-export const initialize = () => (dispatch) => {
-    let promise = dispatch(setAuthUserDataThunkCreator())
-    promise.then(() => {
-        dispatch(setInitializeSucsess())
-    })
+export const initialize = () => async (dispatch) => {
+    await dispatch(setAuthUserDataThunkCreator())
+
+    dispatch(setInitializeSucsess())
+
 
     // let promise = dispatch(setAuthUserDataThunkCreator())
     // let promiseUser = dispatch(setUsers())
     // let promiseCreateData = dispatch(setData())
-    
+
     // // Когда есть много промисов, мы из помещаем в массив и запускаем setInitializeSucsess после resolve всего массива промисов.
 
     // Promise.all([promise, promiseUser, promiseCreateData]) 
