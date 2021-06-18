@@ -1,4 +1,4 @@
-const SET_SUBMITED_DATA = 'SET_SUBMITED_DATA'
+const SET_SUBMITED_DATA = 'login/SET_SUBMITED_DATA'
 
 let initialState = {
     data: {},
