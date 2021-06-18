@@ -1,10 +1,10 @@
 import { profileAPI } from "../api/api";
 
-const ADD_POST = 'ADD-POST';
-const SET_USER_PROFILE = 'SET_USER_PROFILE';
-const SET_STATUS = 'SET_STATUS';
-const SET_POST_MESSAGE = 'SET_POST_MESSAGE';
-const SET_INITIALIZE_PROFILE = 'SET_INITIALIZE_PROFILE';
+const ADD_POST = 'profile/ADD-POST';
+const SET_USER_PROFILE = 'profile/SET_USER_PROFILE';
+const SET_STATUS = 'profile/SET_STATUS';
+const SET_POST_MESSAGE = 'profile/SET_POST_MESSAGE';
+const SET_INITIALIZE_PROFILE = 'profile/SET_INITIALIZE_PROFILE';
 
 let initialState = {
     postsData: [
