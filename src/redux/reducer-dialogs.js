@@ -15,8 +15,6 @@ let initialState = {
 const reducerDialogs = (state = initialState, action) => {
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY:
-            // let stateCopy = {...state};
-            // stateCopy.newMessageBody = action.newBody;
             return {
                 ...state,
                 newMessageBody: action.newBody
@@ -41,9 +39,5 @@ const reducerDialogs = (state = initialState, action) => {
 }
 
 export const sendMessageAC = (message) => ({ type: SEND_MESSAGE, message });
-
-// export const addSomeAvatarAndNameActionCreator = (message) => ({ type: ADD_SOME_AVATAR_AND_NAME, message });
-
-// export const setDialogsMessageAC = (message) => ({type: SET_DIALOGS_MESSAGE, message})
 
 export default reducerDialogs;
