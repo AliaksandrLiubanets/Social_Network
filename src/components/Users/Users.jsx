@@ -2,26 +2,17 @@ import React from 'react';
 import s from './Users.module.css';
 import userEmptyAvatar from '../../assets/userEmptyAvatar.png'
 import { NavLink } from 'react-router-dom';
-import { usersAPI } from '../../api/api';
+import Pagination from '../../common/Pagination/Pagination';
 
-const Users = (props) => {
-   
-    let pageCount = Math.ceil(props.totalUsersCount / props.pageSize);
-    let page = [];
-
-    for (let i = 1; i <= pageCount; i++) {
-        page.push(i);
-    }
+const Users = ({ totalUsersCount, pageSize, onChangeClick, currentPage, ...props }) => {
 
     return <div className={s.usersBox}>
-        <div className={s.paginationBox}>
-            {
-                page.map(p => {
-                    return <span onClick={() => { props.onChangeClick(p) }} className={props.currentPage === p ? s.selectedPage : ''}>{p}</span>
-                })
-            }
-        </div>
-        { 
+        <Pagination
+            totalUsersCount={totalUsersCount}
+            pageSize={pageSize}
+            onChangeClick={onChangeClick}
+            currentPage={currentPage} />
+        {
             props.users.map(u => < div key={u.id} className={s.userData} >
                 <div className={s.avaFollow}>
                     <div className={s.userPhotoBox}>
@@ -30,31 +21,15 @@ const Users = (props) => {
                             <img className={s.userPhoto} src={u.photos.small !== null ? u.photos.small : userEmptyAvatar}></img>
                         </NavLink>
                     </div>
-                    <div className={s.buttonBox}> 
-                        { 
+                    <div className={s.buttonBox}>
+                        {
                             u.followed === false
-                                ? <button disabled={props.followingInProgress.some(id => id === u.id )} onClick={() => {
+                                ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
                                     props.followUser(u.id)
-                                        // props.toggleFollowingProgress(true, u.id)
-                                        // usersAPI.followUser(u.id)
-                                        // .then(response => {
-                                        //     if (response.data.resultCode === 0) {
-                                        //         props.followUser(u.id)
-                                        //     }
-                                        //     props.toggleFollowingProgress(false, u.id)
-                                        // })
                                 }}>Follow</button>
 
                                 : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
                                     props.unfollowUser(u.id)
-                                    // props.toggleFollowingProgress(true, u.id)
-                                    // usersAPI.unfollowUser(u.id)
-                                    //     .then(response => {
-                                    //         if (response.data.resultCode === 0) {
-                                    //             props.unfollowUser(u.id)
-                                    //         }
-                                    //         props.toggleFollowingProgress(false, u.id)
-                                    //     })
                                 }}>Unfollow</button>
                         }
                     </div>
@@ -72,7 +47,7 @@ const Users = (props) => {
             </div>
             )
         }
-    </div >
+    </div>
 }
 
 export default Users;

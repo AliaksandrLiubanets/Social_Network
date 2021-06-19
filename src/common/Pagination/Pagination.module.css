@@ -1,0 +1,14 @@
+.selectedPage {
+    font-weight: bold;    
+}
+
+.paginationBox {
+    padding: 10px;
+    background-color: aqua;
+}
+
+.paginationBox span {
+    padding: 2px;
+    cursor: pointer;
+}
+
