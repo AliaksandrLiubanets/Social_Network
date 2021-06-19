@@ -2,16 +2,16 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { alphaNumeric, maxLength30, minLength4, required, minLength } from '../../common/validators/validator'
-import { login, logout } from './../../redux/reducer-auth'
+import { login } from './../../redux/reducer-auth'
 import s from './Login.module.css'
 import { Redirect } from 'react-router'
 
 const inputField = (props) => {
-    let {input, type, placeholder, meta: {touched, error}} = props
+    let {input, type, placeholder, meta: {touched, error}, isAuth, isError} = props
     return (
     
         <div>
-            <input className={touched &&  (error || (!props.isAuth && props.isError)) ? s.errorBorder : undefined } {...input} type={type} placeholder={placeholder} />
+            <input className={touched &&  (error || (!isAuth && isError)) ? s.errorBorder : undefined } {...input} type={type} placeholder={placeholder} />
             {
                 touched &&  error && <span className={s.error}>{ error }</span>
             }
@@ -22,7 +22,7 @@ const inputField = (props) => {
 const minLength2 = minLength(2) 
 
 let LoginForm = (props) => {
-    let {pristine, submitting, reset, handleSubmit } = props        
+    let {pristine, submitting, handleSubmit } = props        
     return <>
         <form onSubmit={handleSubmit}>
             <div><Field component={inputField} name='email' validate={[required, minLength4, maxLength30]} type="email" placeholder='Email' /></div>
@@ -30,7 +30,6 @@ let LoginForm = (props) => {
             <div><Field component='input' name='rememberMe' type="checkbox" />remember me</div>
             {props.error ? <div className={s.errorText}>{props.error}</div> : null}
             <button className={s.button} type='submit' disabled={ pristine || submitting} >Send</button>
-            {/* <button className={s.buttonClear} type='submit' disabled={ pristine || submitting } onClick={reset}>Clear</button> */}
         </form>
     </>
 }
@@ -50,7 +49,6 @@ const Login = (props) => {
         <h1>LOGIN</h1>
         <LoginForm onSubmit={funSubmit} />
     </div>
-
 }
 
 const mapStateToProps = (state) => {
