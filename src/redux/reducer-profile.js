@@ -10,7 +10,7 @@ let initialState = {
     postsData: [
 
         { id: 1, message: 'Hi, How are you?', likesCount: 15, avatar: 'https://img0.liveinternet.ru/images/attach/c/3/84/342/84342334_Girls29563.jpg' },
-        { id: 2, message: 'Hi, ?', likesCount: 5, avatar: 'https://img0.liveinternet.ru/images/attach/c/3/84/342/84342334_Girls29563.jpg' }, 
+        { id: 2, message: 'Hi, ?', likesCount: 5, avatar: 'https://img0.liveinternet.ru/images/attach/c/3/84/342/84342334_Girls29563.jpg' },
         { id: 3, message: 'Hi you?', likesCount: 1, avatar: 'https://img0.liveinternet.ru/images/attach/c/3/84/342/84342334_Girls29563.jpg' }
     ],
 
@@ -69,36 +69,30 @@ export const setUserProfileStatusAC = (status) => ({ type: SET_STATUS, status })
 export const setPostMessageAC = (message) => ({ type: SET_POST_MESSAGE, message })
 export const setInitializeProfile = () => ({ type: SET_INITIALIZE_PROFILE })
 
-const setUserProfileThunkCreator = (userId) => (dispatch) => {
-    profileAPI.getProfile(userId)
-        .then(data => {
-            dispatch(setUserProfileAC(data))
-        })
+const setUserProfileThunkCreator = (userId) => async (dispatch) => {
+    const data = await profileAPI.getProfile(userId)
+
+    dispatch(setUserProfileAC(data))
 }
 
-const getStatusThunkCreator = (userId) => (dispatch) => {
-    profileAPI.getStatus(userId)
-        .then(response => {
-            dispatch(setUserProfileStatusAC(response.data))
-        })
+const getStatusThunkCreator = (userId) => async (dispatch) => {
+    const response = await profileAPI.getStatus(userId)
+
+    dispatch(setUserProfileStatusAC(response.data))
 }
 
-export const updateStatusThunkCreator = (status) => (dispatch) => {
-    profileAPI.updateStatus(status)
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(setUserProfileStatusAC(status))
-            }
-        })
+export const updateStatusThunkCreator = (status) => async (dispatch) => {
+    const response = await profileAPI.updateStatus(status)
+
+    if (response.data.resultCode === 0) {
+        dispatch(setUserProfileStatusAC(status))
+    }
 }
 
-export const initializeProfile = (userId) => (dispatch) => {
-    let promiseSetStatus = dispatch(getStatusThunkCreator(userId))
-    let promiseUserProfile = dispatch(setUserProfileThunkCreator(userId))
-    Promise.all([promiseSetStatus, promiseUserProfile])
-        .then(() => {
-            dispatch(setInitializeProfile())
-        })
+export const initializeProfile = (userId) => async (dispatch) => {
+    await dispatch(getStatusThunkCreator(userId))
+    await dispatch(setUserProfileThunkCreator(userId))
+    dispatch(setInitializeProfile())
 }
 
 export default reducerProfile;
