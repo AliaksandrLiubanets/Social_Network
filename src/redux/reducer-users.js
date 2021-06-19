@@ -81,29 +81,30 @@ export const getUsersThunkCreator = (currentPage, pageSize) => {
     }
 }
 
-export const followUser = (userId) => {
-    return async (dispatch) => {
-        dispatch(toggleFollowingProgress(true, userId))
-        const response = await usersAPI.followUser(userId)
+const followUnfollowFlow = async (dispatch, userId, apiMethod, actionCreator) => {
+    dispatch(toggleFollowingProgress(true, userId))
+    const response = await apiMethod(userId) 
 
-        if (response.data.resultCode === 0) {
-            dispatch(followUserAC(userId))
-        }
-        dispatch(toggleFollowingProgress(false, userId))
+    if (response.data.resultCode === 0) {
+        dispatch(actionCreator(userId))                 
     }
+    dispatch(toggleFollowingProgress(false, userId))
 }
 
+export const followUser = (userId) => {
+    return async (dispatch) => {
+        let apiMethod = usersAPI.followUser
+        let actionCreator = followUserAC
+        followUnfollowFlow(dispatch, userId, apiMethod, actionCreator)
+    }
+}
 
 export const unfollowUser = (userId) => {
     return async (dispatch) => {
-        dispatch(toggleFollowingProgress(true, userId))
-        const response = await usersAPI.unfollowUser(userId)
-
-        if (response.data.resultCode === 0) {
-            dispatch(unfollowUserAC(userId))
-        }
-        dispatch(toggleFollowingProgress(false, userId))
+        let apiMethod = usersAPI.unfollowUser
+        let actionCreator = unfollowUserAC
+        followUnfollowFlow(dispatch, userId, apiMethod, actionCreator)
     }
 }
 
-export default reducerUsers;    
+export default reducerUsers;
