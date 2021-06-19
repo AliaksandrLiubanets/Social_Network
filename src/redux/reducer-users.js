@@ -93,17 +93,13 @@ const followUnfollowFlow = async (dispatch, userId, apiMethod, actionCreator) =>
 
 export const followUser = (userId) => {
     return async (dispatch) => {
-        let apiMethod = usersAPI.followUser
-        let actionCreator = followUserAC
-        followUnfollowFlow(dispatch, userId, apiMethod, actionCreator)
+        followUnfollowFlow(dispatch, userId, usersAPI.followUser, followUserAC)
     }
 }
 
 export const unfollowUser = (userId) => {
     return async (dispatch) => {
-        let apiMethod = usersAPI.unfollowUser
-        let actionCreator = unfollowUserAC
-        followUnfollowFlow(dispatch, userId, apiMethod, actionCreator)
+        followUnfollowFlow(dispatch, userId, usersAPI.unfollowUser, unfollowUserAC)
     }
 }
 
