@@ -1,4 +1,4 @@
-import {applyMiddleware, createStore} from 'redux';
+import {applyMiddleware, createStore, compose} from 'redux';
 import {combineReducers} from 'redux';
 import reducerAuth from './reducer-auth';
 import reducerDialogs from './reducer-dialogs';
@@ -20,10 +20,14 @@ let reducers = combineReducers({
     app: reducerApp   
 })
 
-let store = createStore(reducers, applyMiddleware(thunkMiddleWare));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleWare)));
+
+// let store = createStore(reducers, applyMiddleware(thunkMiddleWare));
 // getState();
 // subscribe(observer);
 // dispatch(action);
 
+window.__store__ = store
 
 export default store; 
