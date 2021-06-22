@@ -9,7 +9,8 @@ const Users = ({ totalUsersCount, pageSize, onChangeClick, currentPage, ...props
         <Pagination totalUsersCount={totalUsersCount}
                     pageSize={pageSize}
                     onChangeClick={onChangeClick}
-                    currentPage={currentPage} />
+                    currentPage={currentPage} 
+/>
         {
             props.users.map(u => <User  user={u}
                                         key={u.id} 
