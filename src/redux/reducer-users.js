@@ -7,7 +7,7 @@ const SET_USERS = 'users/SET_USERS';
 const SET_CURRENT_PAGE = 'users/SET_CURRENT_PAGE';
 const SET_TOTAL_USERS_COUNT = 'users/SET_TOTAL_USERS_COUNT';
 const TOGGLE_IS_FETCHING = 'users/TOGGLE_IS_FETCHING';
-const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS';
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'users/TOGGLE_IS_FOLLOWING_PROGRESS';
 
 let initialState = {
     users: [],
@@ -25,23 +25,11 @@ const reducerUsers = (state = initialState, action) => {
             return {
                 ...state,
                 users: updateObjectInArray(state.users, 'id', action.userId, {followed: true})
-                // state.users.map(u => {
-                //     if (u.id === action.userId) {
-                //         return { ...u, followed: true }
-                //     }
-                //     return u;
-                // })
             }
         case UNFOLLOW:
             return {
                 ...state,
                 users: updateObjectInArray(state.users, 'id', action.userId, {followed: false})
-                // state.users.map(u => {
-                //     if (u.id === action.userId) {
-                //         return { ...u, followed: false }
-                //     }
-                //     return u;
-                // })
             }
         case SET_USERS:
             return { ...state, users: action.users }
