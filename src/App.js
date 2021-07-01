@@ -4,15 +4,17 @@ import Navbar from './components/Navbar/Navbar';
 import News from './components/News/News';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Music from './components/Music/Music';
-import DialogsContainer from './components/Dialogs/DialogsContainer';
+
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import Login from './components/Login/Login';
 import SettingsContainer from './components/Settings/SettingsContainer';
-import { Component } from 'react';
+import React, { Component, Suspense } from 'react';
 import { initialize } from './redux/reducer-app';
 import { connect } from 'react-redux';
 import Preloader from './common/Preloader';
+
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer') )
 
 class App extends Component { 
   
@@ -32,7 +34,9 @@ class App extends Component {
         <HeaderContainer />
         <Navbar />
         <div className='app-wrapper-content'>
-          <Route path='/dialogs' render={() => <DialogsContainer />} />
+          <Route path='/dialogs' render={() => <Suspense fallback={<div>Loading...</div>}>
+                                                  <DialogsContainer />
+                                              </Suspense> } />
           <Route path='/profile/:userId?' render={() => <ProfileContainer />} /> 
           <Route path='/news' render={() => <News />} />
           <Route path='/music' render={() => <Music />} />
