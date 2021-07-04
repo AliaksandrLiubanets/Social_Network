@@ -4,8 +4,6 @@ import Navbar from './components/Navbar/Navbar';
 import News from './components/News/News';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Music from './components/Music/Music';
-
-import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import Login from './components/Login/Login';
 import SettingsContainer from './components/Settings/SettingsContainer';
@@ -15,6 +13,7 @@ import { connect } from 'react-redux';
 import Preloader from './common/Preloader';
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer') )
+const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'))
 
 class App extends Component { 
   
@@ -40,7 +39,9 @@ class App extends Component {
           <Route path='/profile/:userId?' render={() => <ProfileContainer />} /> 
           <Route path='/news' render={() => <News />} />
           <Route path='/music' render={() => <Music />} />
-          <Route path='/users' render={() => <UsersContainer />} />
+          <Route path='/users' render={() => <Suspense fallback={<div>Loading...</div>}>
+                                              <UsersContainer />
+                                              </Suspense>} />
           <Route path='/settings' render={() => <SettingsContainer />} />
           <Route path='/login' render={() => <Login />} />
         </div>
